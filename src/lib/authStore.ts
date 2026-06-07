@@ -151,30 +151,20 @@ export const useAuthStore = create<AuthState>((set, get) => {
       }
 
       try {
-        // Sign up user in Supabase Auth
+        // Sign up user in Supabase Auth with metadata so database trigger handles profile creation
         const { data: authData, error: authError } = await supabase.auth.signUp({
           email,
           password,
+          options: {
+            data: {
+              username
+            }
+          }
         });
 
         if (authError) throw authError;
 
         if (authData?.user) {
-          // Create user profile in profiles table
-          const { error: profileError } = await supabase
-            .from('profiles')
-            .insert([
-              {
-                id: authData.user.id,
-                username,
-                points: 0,
-                correct_predictions: 0,
-                total_predictions: 0,
-              }
-            ]);
-
-          if (profileError) throw profileError;
-
           const newUserProfile: UserProfile = {
             id: authData.user.id,
             email,
