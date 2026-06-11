@@ -2,16 +2,18 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+export const dynamic = 'force-dynamic';
+
 // Server-side route to fetch official FIFA match results and schedule dynamically
 export async function GET() {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
 
     const response = await fetch('https://worldcup26.ir/get/games', {
       signal: controller.signal,
       headers: { 'User-Agent': 'FIFA-WorldCup-Portal-2026' },
-      next: { revalidate: 30 } // Cache for 30 seconds
+      next: { revalidate: 0 } // Do not cache this dynamic sync call
     });
 
     clearTimeout(timeoutId);
