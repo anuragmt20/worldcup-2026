@@ -90,6 +90,8 @@ export default function MatchesPage() {
     }
   };
 
+  const liveMatchesList = matches.filter(m => !m.finished && m.timeElapsed && m.timeElapsed !== 'notstarted');
+
   return (
     <div className="mx-auto max-w-7xl px-6 py-10 lg:px-12 space-y-8">
       
@@ -100,6 +102,85 @@ export default function MatchesPage() {
           <p className="text-sm text-slate-400 mt-1">Explore fixtures, view kickoffs in your timezone, and track live-synced official scores</p>
         </div>
       </div>
+
+      {/* Live Matches Strip */}
+      {liveMatchesList.length > 0 && (
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-rose-500 animate-ping" />
+            <h2 className="text-xs font-black tracking-widest text-rose-500 uppercase">Live Matches</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {liveMatchesList.map((match) => {
+              const homeTeam = getTeam(match.homeTeamId);
+              const awayTeam = getTeam(match.awayTeamId);
+              const venue = getStadium(match.stadiumId);
+              const isKnockout = match.type !== 'group';
+
+              return (
+                <div 
+                  key={match.id}
+                  onClick={() => setActiveMatchDetail(match)}
+                  className="flex items-center justify-between rounded-xl border border-rose-500/30 bg-rose-950/10 shadow-[0_0_20px_rgba(239,68,68,0.08)] p-4.5 cursor-pointer hover:border-rose-500/50 hover:bg-rose-950/15 transition-all"
+                >
+                  <div className="flex-1 space-y-3.5 pr-4">
+                    <div className="flex items-center gap-3 text-[9px] font-extrabold tracking-widest text-slate-450 uppercase">
+                      <span>MATCH #{match.id}</span>
+                      <span>&bull;</span>
+                      <span className="text-rose-400">{isKnockout ? match.group : `GROUP ${match.group}`}</span>
+                      <span>&bull;</span>
+                      <span className="text-rose-500 font-black animate-pulse">Live</span>
+                    </div>
+
+                    <div className="space-y-2.5">
+                      <div className="flex items-center gap-3">
+                        {homeTeam ? (
+                          <>
+                            <img src={homeTeam.flag} alt="" className="h-4 w-6 object-cover rounded shadow-sm border border-slate-800" />
+                            <span className="text-xs font-black text-slate-200 uppercase tracking-wide">{homeTeam.name}</span>
+                          </>
+                        ) : (
+                          <span className="text-xs font-bold text-slate-500 italic uppercase">{match.homeTeamLabel || 'TBD'}</span>
+                        )}
+                      </div>
+                      
+                      <div className="flex items-center gap-3">
+                        {awayTeam ? (
+                          <>
+                            <img src={awayTeam.flag} alt="" className="h-4 w-6 object-cover rounded shadow-sm border border-slate-800" />
+                            <span className="text-xs font-black text-slate-200 uppercase tracking-wide">{awayTeam.name}</span>
+                          </>
+                        ) : (
+                          <span className="text-xs font-bold text-slate-500 italic uppercase">{match.awayTeamLabel || 'TBD'}</span>
+                        )}
+                      </div>
+                    </div>
+
+                    {venue && (
+                      <div className="flex items-center gap-1 text-[10px] text-slate-500">
+                        <MapPin className="h-3 w-3" />
+                        <span className="truncate">{venue.name}, {venue.city}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col items-center justify-center border-l border-rose-500/10 pl-6 w-24 shrink-0 text-center space-y-1.5">
+                    <div className="text-sm font-black text-slate-200 bg-rose-950/35 py-1.5 px-3 rounded border border-rose-500/30">
+                      {match.homeScore} - {match.awayScore}
+                    </div>
+                    <span className="text-[9px] font-black text-rose-550 uppercase tracking-wider animate-pulse">{match.timeElapsed}</span>
+                    
+                    <div className="text-[9px] font-bold text-rose-450 hover:text-rose-350 flex items-center gap-0.5 pt-1">
+                      <Eye className="h-3 w-3" />
+                      Details
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Filter controls */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 rounded-xl glass-panel p-5">
@@ -176,13 +257,23 @@ export default function MatchesPage() {
                         <div 
                           key={match.id}
                           onClick={() => setActiveMatchDetail(match)}
-                          className="flex items-center justify-between rounded-xl glass-panel glass-panel-hover p-4 cursor-pointer relative"
+                          className={`flex items-center justify-between rounded-xl glass-panel glass-panel-hover p-4 cursor-pointer relative ${
+                            !match.finished && match.timeElapsed && match.timeElapsed !== 'notstarted'
+                              ? 'border-rose-500/25 bg-rose-950/5 shadow-[0_0_15px_rgba(239,68,68,0.05)]'
+                              : ''
+                          }`}
                         >
                           <div className="flex-1 space-y-3.5 pr-4">
                             <div className="flex items-center gap-3 text-[9px] font-extrabold tracking-widest text-slate-500 uppercase">
                               <span>MATCH #{match.id}</span>
                               <span>&bull;</span>
                               <span className="text-emerald-500">{isKnockout ? match.group : `GROUP ${match.group}`}</span>
+                              {!match.finished && match.timeElapsed && match.timeElapsed !== 'notstarted' && (
+                                <>
+                                  <span>&bull;</span>
+                                  <span className="text-rose-500 font-black animate-pulse uppercase">Live</span>
+                                </>
+                              )}
                             </div>
 
                             <div className="space-y-2">
@@ -218,7 +309,14 @@ export default function MatchesPage() {
                           </div>
 
                           <div className="flex flex-col items-center justify-center border-l border-slate-900 pl-6 w-24 shrink-0 text-center space-y-1.5">
-                            {match.finished ? (
+                            {!match.finished && match.timeElapsed && match.timeElapsed !== 'notstarted' ? (
+                              <>
+                                <div className="text-sm font-black text-slate-200 bg-rose-950/20 py-1.5 px-3 rounded border border-rose-500/25">
+                                  {match.homeScore} - {match.awayScore}
+                                </div>
+                                <span className="text-[9px] font-black text-rose-500 uppercase tracking-wider animate-pulse">{match.timeElapsed}</span>
+                              </>
+                            ) : match.finished ? (
                               <>
                                 <div className="text-sm font-black text-slate-200 bg-slate-950/50 py-1.5 px-3 rounded border border-slate-900">
                                   {match.homeScore} - {match.awayScore}
@@ -297,7 +395,14 @@ export default function MatchesPage() {
                     </div>
 
                     <div className="col-span-1 text-center">
-                      {match.finished ? (
+                      {!match.finished && match.timeElapsed && match.timeElapsed !== 'notstarted' ? (
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="text-xl font-black text-rose-500 animate-pulse">{match.homeScore} - {match.awayScore}</div>
+                          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-black text-rose-500 bg-rose-500/10 border border-rose-500/20 uppercase tracking-widest">
+                            {match.timeElapsed}
+                          </span>
+                        </div>
+                      ) : match.finished ? (
                         <div className="text-xl font-black text-slate-100">{match.homeScore} - {match.awayScore}</div>
                       ) : (
                         <div className="text-slate-650 font-black text-lg">VS</div>
@@ -327,7 +432,7 @@ export default function MatchesPage() {
                   )}
                 </div>
 
-                {match.finished && (match.homeScorers || match.awayScorers) && (
+                {(match.finished || (!match.finished && match.timeElapsed && match.timeElapsed !== 'notstarted')) && (match.homeScorers || match.awayScorers) && (
                   <div className="space-y-3">
                     <h3 className="text-[10px] font-extrabold tracking-wider text-slate-500 uppercase">Match Events & Goals</h3>
                     <div className="grid grid-cols-2 gap-4 text-xs bg-slate-950/40 p-4 rounded-xl border border-slate-900">

@@ -12,7 +12,7 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
   const { teams, matches, getStandings, stadiums } = useTournamentStore();
 
   const team = teams.find(t => t.id === id);
-  
+
   if (!team) {
     return (
       <div className="mx-auto max-w-7xl px-6 py-20 text-center space-y-4">
@@ -34,7 +34,7 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
   const lineup: { name: string; pos: string }[] = (lineups as Record<string, any>)[team.id] ?? [];
 
   // Group players by position for pitch display
-  const gk  = lineup.filter(p => p.pos === 'GK');
+  const gk = lineup.filter(p => p.pos === 'GK');
   const dfs = lineup.filter(p => p.pos === 'DF');
   const mfs = lineup.filter(p => p.pos === 'MF');
   const fws = lineup.filter(p => p.pos === 'FW');
@@ -60,7 +60,7 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-10 lg:px-12 space-y-8">
-      
+
       {/* Back button */}
       <div>
         <Link href="/teams" className="inline-flex items-center gap-1 text-xs font-bold text-slate-400 hover:text-white transition-colors">
@@ -71,10 +71,10 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
       {/* Profile Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 rounded-2xl glass-panel p-8">
         <div className="flex items-center gap-5">
-          <img 
-            src={team.flag} 
-            alt={`${team.name} Flag`} 
-            className="h-14 w-22 object-cover rounded shadow border border-slate-800 shrink-0" 
+          <img
+            src={team.flag}
+            alt={`${team.name} Flag`}
+            className="h-14 w-22 object-cover rounded shadow border border-slate-800 shrink-0"
           />
           <div>
             <h1 className="text-3xl font-black tracking-tight text-slate-100 uppercase">{team.name}</h1>
@@ -94,16 +94,16 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
+
         {/* Left Column: Standings & Matches */}
         <div className="lg:col-span-7 space-y-8">
-          
+
           {/* Group Standings */}
           <div className="rounded-xl glass-panel p-6 space-y-4">
             <h3 className="text-sm font-extrabold tracking-wider text-slate-100 uppercase flex items-center gap-2">
               <List className="h-4 w-4 text-emerald-400" /> Group standings
             </h3>
-            
+
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
@@ -117,8 +117,8 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
                 </thead>
                 <tbody className="divide-y divide-slate-900/40">
                   {groupStandings.map((row) => (
-                    <tr 
-                      key={row.teamId} 
+                    <tr
+                      key={row.teamId}
                       className={`
                         transition-colors
                         ${row.teamId === team.id ? 'bg-emerald-500/5 text-emerald-400 font-bold' : 'text-slate-300'}
@@ -157,13 +157,13 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
 
                 return (
                   <div key={match.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-lg bg-slate-950/40 border border-slate-900/60 hover:border-slate-850 transition-colors">
-                    
+
                     {/* Details */}
                     <div className="space-y-1">
                       <div className="text-[9px] font-black text-slate-500 uppercase tracking-widest">
                         MATCH #{match.id} &bull; {match.type === 'group' ? `GROUP ${match.group}` : match.group}
                       </div>
-                      
+
                       <div className="flex items-center gap-2 text-xs font-black text-slate-200">
                         <span>{isHome ? 'VS' : 'AT'}</span>
                         {opponent ? (
@@ -187,7 +187,7 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
                     {/* Score or Status */}
                     <div className="flex items-center gap-3 shrink-0">
                       <span className="text-[10px] font-bold text-slate-400">{formatDate(match.localDate)}</span>
-                      
+
                       {match.finished ? (
                         <div className={`text-xs font-black px-3 py-1.5 rounded border ${scoreHome > scoreAway ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : scoreHome < scoreAway ? 'bg-rose-500/5 border-rose-500/10 text-rose-400' : 'bg-slate-900 border-slate-850 text-slate-300'}`}>
                           {match.homeScore} - {match.awayScore}
@@ -213,7 +213,7 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
 
         {/* Right Column: Squad Roster Grid */}
         <div className="lg:col-span-5 space-y-8">
-          
+
           {/* Pitch Roster */}
           <div className="rounded-xl glass-panel p-6 space-y-6">
             <h3 className="text-sm font-extrabold tracking-wider text-slate-100 uppercase flex items-center gap-2">
@@ -222,7 +222,7 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
 
             {/* Soccer Pitch Graphic representation */}
             <div style={{ aspectRatio: '3/4' }} className="relative w-full rounded-lg bg-emerald-950/45 border-2 border-emerald-500/20 overflow-hidden flex flex-col justify-between p-4 shadow-inner">
-              
+
               {/* Center Line and Center Circle */}
               <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-0.5 bg-emerald-500/10" />
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-20 w-20 rounded-full border border-emerald-500/10" />

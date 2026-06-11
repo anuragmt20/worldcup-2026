@@ -13,11 +13,20 @@ export default function MatchScheduleCard() {
   const getTeam = (id: string) => teams.find(t => t.id === id);
   const getStadium = (id: string) => stadiums.find(s => s.id === id);
 
-  // Group stage matches only for the quick list
-  const groupMatches = matches.filter(m => m.type === 'group');
-
-  // Sort by date
-  const sortedMatches = [...groupMatches].sort((a, b) => {
+  // Sort matches so that Live/Ongoing matches come first, then other unfinished matches chronologically, and finally finished matches.
+  const sortedMatches = [...matches].sort((a, b) => {
+    const isLiveA = !a.finished && a.timeElapsed && a.timeElapsed !== 'notstarted';
+    const isLiveB = !b.finished && b.timeElapsed && b.timeElapsed !== 'notstarted';
+    
+    if (isLiveA && !isLiveB) return -1;
+    if (!isLiveA && isLiveB) return 1;
+    
+    // Unfinished matches first
+    if (a.finished !== b.finished) {
+      return a.finished ? 1 : -1;
+    }
+    
+    // Chronological order within those groups
     const dateA = new Date(a.localDate);
     const dateB = new Date(b.localDate);
     return dateA.getTime() - dateB.getTime();
@@ -84,7 +93,11 @@ export default function MatchScheduleCard() {
           return (
             <div 
               key={match.id}
-              className="flex flex-col p-4 rounded-xl bg-slate-950/30 border border-slate-900/60 hover:border-slate-800/80 transition-colors"
+              className={`flex flex-col p-4 rounded-xl transition-all ${
+                !match.finished && match.timeElapsed && match.timeElapsed !== 'notstarted'
+                  ? 'bg-rose-950/5 border-rose-500/20 shadow-[0_0_15px_rgba(239,68,68,0.05)]'
+                  : 'bg-slate-950/30 border-slate-900/60 hover:border-slate-800/80'
+              }`}
             >
               {/* Match Meta */}
               <div className="flex items-center justify-between text-[10px] font-bold tracking-wider text-slate-500 uppercase mb-3">
@@ -104,20 +117,32 @@ export default function MatchScheduleCard() {
                   <span className="text-xs font-black text-slate-200 uppercase tracking-wider">{homeTeam.fifaCode}</span>
                 </div>
 
-                {/* Score or Time */}
-                <div className="col-span-3 flex flex-col items-center justify-center text-center">
-                  {match.finished ? (
-                    <div className="text-base font-black text-slate-100 flex items-center gap-2">
+              {/* Score, Live or Time */}
+              <div className="col-span-3 flex flex-col items-center justify-center text-center">
+                {!match.finished && match.timeElapsed && match.timeElapsed !== 'notstarted' ? (
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[9px] font-black text-rose-500 bg-rose-500/10 border border-rose-500/20 uppercase tracking-widest animate-pulse">
+                      <span className="h-1.5 w-1.5 rounded-full bg-rose-500" />
+                      Live &bull; {match.timeElapsed}
+                    </span>
+                    <div className="text-base font-black text-slate-100 flex items-center gap-2 mt-0.5">
                       <span>{match.homeScore}</span>
-                      <span className="text-slate-600 font-normal">:</span>
+                      <span className="text-slate-650 font-normal">:</span>
                       <span>{match.awayScore}</span>
                     </div>
-                  ) : (
-                    <div className="text-sm font-black text-slate-100">
-                      {formatted.time}
-                    </div>
-                  )}
-                </div>
+                  </div>
+                ) : match.finished ? (
+                  <div className="text-base font-black text-slate-100 flex items-center gap-2">
+                    <span>{match.homeScore}</span>
+                    <span className="text-slate-605 font-normal">:</span>
+                    <span>{match.awayScore}</span>
+                  </div>
+                ) : (
+                  <div className="text-sm font-black text-slate-100">
+                    {formatted.time}
+                  </div>
+                )}
+              </div>
 
                 {/* Away Team */}
                 <div className="col-span-2 flex flex-col items-center gap-1">
