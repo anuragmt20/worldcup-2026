@@ -16,6 +16,8 @@ export async function GET() {
   let gamesData: any = null;
   let successSource = '';
 
+  const fetchErrors: { url: string; error: string }[] = [];
+
   for (const url of urlsToTry) {
     try {
       const controller = new AbortController();
@@ -45,9 +47,12 @@ export async function GET() {
             : `Official FIFA Match Center (Live API via Proxy: ${new URL(url).hostname})`;
           break;
         }
+      } else {
+        fetchErrors.push({ url, error: `HTTP Status ${response.status}` });
       }
     } catch (e: any) {
       console.warn(`Fetch failed for URL: ${url}. Error: ${e.message}`);
+      fetchErrors.push({ url, error: e.message });
     }
   }
 
@@ -68,7 +73,8 @@ export async function GET() {
     return NextResponse.json({ 
       success: true, 
       source: 'Local FIFA Database (Offline Fallback)',
-      matches: matches
+      matches: matches,
+      debugErrors: fetchErrors
     });
   } catch (fallbackErr: any) {
     return NextResponse.json({ success: false, error: fallbackErr.message }, { status: 500 });
