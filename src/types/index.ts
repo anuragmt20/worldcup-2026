@@ -23,6 +23,7 @@ export interface Stadium {
   countryFa: string;
   capacity: number;
   region: string;
+  image?: string;
 }
 
 export interface Match {
@@ -69,6 +70,15 @@ export interface Prediction {
   matchId: string;
   predictedWinner: 'home' | 'away' | 'draw';
   timestamp: number;
+  betAmount?: number;
+  settled?: boolean;
+  poolHome?: number;
+  poolDraw?: number;
+  poolAway?: number;
+  totalPool?: number;
+  outcome?: 'won' | 'lost' | 'pending';
+  payout?: number;
+  acknowledged?: boolean;
 }
 
 export interface PredictionLeaderboardEntry {

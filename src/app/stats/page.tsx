@@ -125,7 +125,7 @@ export default function StatsPage() {
           <BarChart3 className="h-12 w-12 text-slate-600 mx-auto mb-4 animate-pulse" />
           <h3 className="text-sm font-bold text-slate-300 uppercase">Analytics Dashboard Empty</h3>
           <p className="text-xs text-slate-500 mt-1.5 max-w-md mx-auto">
-            Matches must be simulated or played to populate the leaderboard. Use the **Simulation Control panel** on the Homepage to run games!
+            Tournament matches have not started yet. Use the **FIFA Sync** on the Homepage to fetch the official schedules and live results!
           </p>
         </div>
       ) : (

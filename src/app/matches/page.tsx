@@ -7,13 +7,11 @@ import { Match } from '@/types';
 import { formatMatchDateTime } from '@/lib/timezoneUtils';
 
 export default function MatchesPage() {
-  const { matches, teams, stadiums, simulateMatch, manualPlayMatch, liveSyncMode, timezone } = useTournamentStore();
-  const [activeView, setActiveView] = useState<'calendar' | 'playZone'>('calendar');
+  const { matches, teams, stadiums, liveSyncMode, timezone } = useTournamentStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGroup, setSelectedGroup] = useState('All');
   const [selectedDate, setSelectedDate] = useState('All');
   const [activeMatchDetail, setActiveMatchDetail] = useState<Match | null>(null);
-  const [scoresInput, setScoresInput] = useState<{ [matchId: string]: { home: string; away: string } }>({});
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -92,75 +90,14 @@ export default function MatchesPage() {
     }
   };
 
-  const handleSimulateInPopup = (matchId: string) => {
-    const scoreHome = Math.floor(Math.random() * 3) + (Math.random() > 0.6 ? 1 : 0);
-    const scoreAway = Math.floor(Math.random() * 3) + (Math.random() > 0.6 ? 1 : 0);
-    simulateMatch(matchId, scoreHome, scoreAway);
-    
-    const updated = useTournamentStore.getState().matches.find(m => m.id === matchId);
-    if (updated) {
-      setActiveMatchDetail(updated);
-    }
-  };
-
-  const handleScoreInputChange = (matchId: string, side: 'home' | 'away', val: string) => {
-    // Only accept numeric positive characters
-    if (val !== '' && !/^\d+$/.test(val)) return;
-
-    setScoresInput(prev => ({
-      ...prev,
-      [matchId]: {
-        ...prev[matchId] || { home: '', away: '' },
-        [side]: val
-      }
-    }));
-  };
-
-  const handleManualRecord = (matchId: string) => {
-    const inputs = scoresInput[matchId];
-    if (!inputs || inputs.home === '' || inputs.away === '') return;
-
-    const h = Number(inputs.home);
-    const a = Number(inputs.away);
-    manualPlayMatch(matchId, h, a);
-  };
-
   return (
     <div className="mx-auto max-w-7xl px-6 py-10 lg:px-12 space-y-8">
       
       {/* Title */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-3xl font-black tracking-tight text-white uppercase">Match Schedule & Play Zone</h1>
-          <p className="text-sm text-slate-400 mt-1">Explore fixtures, sync live scores, or play custom brackets</p>
-        </div>
-
-        {/* View Tabs */}
-        <div className="flex rounded-lg bg-slate-900/40 p-1 border border-slate-900 shrink-0">
-          <button
-            onClick={() => setActiveView('calendar')}
-            className={`
-              px-4 py-2 text-xs font-bold rounded-md transition-colors cursor-pointer
-              ${activeView === 'calendar' 
-                ? 'bg-slate-800 text-white shadow-sm' 
-                : 'text-slate-400 hover:text-white'
-              }
-            `}
-          >
-            Matches Calendar
-          </button>
-          <button
-            onClick={() => setActiveView('playZone')}
-            className={`
-              px-4 py-2 text-xs font-bold rounded-md transition-colors cursor-pointer
-              ${activeView === 'playZone' 
-                ? 'bg-slate-800 text-white shadow-sm' 
-                : 'text-slate-400 hover:text-white'
-              }
-            `}
-          >
-            Interactive Play Zone
-          </button>
+          <h1 className="text-3xl font-black tracking-tight text-white uppercase">Match Schedule</h1>
+          <p className="text-sm text-slate-400 mt-1">Explore fixtures, view kickoffs in your timezone, and track live-synced official scores</p>
         </div>
       </div>
 
@@ -194,13 +131,12 @@ export default function MatchesPage() {
           </select>
         </div>
 
-        {/* Date Filter (disabled in playZone to make listing simpler) */}
+        {/* Date Filter */}
         <div className="flex flex-col gap-1.5">
           <select
-            disabled={activeView === 'playZone'}
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
-            className="w-full bg-slate-950/60 border border-slate-850 px-4 py-2.5 rounded-lg text-xs focus:outline-none focus:border-emerald-500/50 text-slate-200 font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-slate-950/60 border border-slate-850 px-4 py-2.5 rounded-lg text-xs focus:outline-none focus:border-emerald-500/50 text-slate-200 font-bold cursor-pointer"
           >
             <option value="All">Filter by Date (All)</option>
             {uniqueDates.map(d => (
@@ -210,8 +146,8 @@ export default function MatchesPage() {
         </div>
       </div>
 
-      {/* 1. Matches Calendar View */}
-      {activeView === 'calendar' && (
+      {/* Matches Calendar View */}
+      <div className="space-y-10">
         <div className="space-y-10">
           {sortedDates.length === 0 ? (
             <div className="text-center py-12 rounded-xl glass-panel p-6">
@@ -295,7 +231,7 @@ export default function MatchesPage() {
                                   {formatMatchDateTime(match, timezone, stadiums).time.split(' ')[0]}
                                 </div>
                                 <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">
-                                  {formatMatchDateTime(match, timezone, stadiums).time.split(' ')[1]}
+                                  {formatMatchDateTime(match, timezone, stadiums).time.split(' ').slice(1).join(' ')}
                                 </span>
                               </>
                             )}
@@ -314,124 +250,7 @@ export default function MatchesPage() {
             })
           )}
         </div>
-      )}
-
-      {/* 2. Interactive Play Zone View */}
-      {activeView === 'playZone' && (
-        <div className="space-y-4">
-          <div className="rounded-xl glass-panel p-4 border border-slate-900 bg-slate-950/40 text-xs text-slate-400 leading-relaxed">
-            {liveSyncMode ? (
-              <span className="text-rose-400 font-bold">
-                ⚠️ FIFA Live Sync Mode is currently ACTIVE. Manual score entries are locked. Disable Live Sync on the Homepage to manually type in scores.
-              </span>
-            ) : (
-              <span>
-                Enter scores in the boxes below and click <strong>Record</strong> to play the match. Standing tables, stats, and bracket progressions will recalculate automatically!
-              </span>
-            )}
-          </div>
-
-          <div className="space-y-3.5">
-            {filteredMatches.length === 0 ? (
-              <div className="text-center py-12 rounded-xl glass-panel">
-                <Play className="h-10 w-10 text-slate-650 mx-auto mb-4" />
-                <h3 className="text-sm font-bold text-slate-300 uppercase">No Playable Matches Found</h3>
-                <p className="text-xs text-slate-500 mt-1">Refine your search or filters.</p>
-              </div>
-            ) : (
-              filteredMatches.map(match => {
-                const homeTeam = getTeam(match.homeTeamId);
-                const awayTeam = getTeam(match.awayTeamId);
-                const inputs = scoresInput[match.id] || { home: '', away: '' };
-                const isPlayable = homeTeam !== undefined && awayTeam !== undefined && !liveSyncMode;
-
-                return (
-                  <div 
-                    key={match.id} 
-                    className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl glass-panel bg-slate-950/30 border border-slate-900/60"
-                  >
-                    {/* Meta */}
-                    <div className="w-32 shrink-0">
-                      <div className="text-[9px] font-extrabold tracking-widest text-slate-500 uppercase">MATCH #{match.id}</div>
-                      <div className="text-[10px] font-bold text-emerald-400 uppercase mt-0.5">{match.type === 'group' ? `GROUP ${match.group}` : match.group}</div>
-                      <div className="text-[9px] font-medium text-slate-500 mt-0.5">{match.localDate.split(' ')[0]}</div>
-                    </div>
-
-                    {/* Team Row & Score Inputs */}
-                    <div className="flex-1 flex items-center justify-center gap-3 md:gap-5">
-                      {/* Home */}
-                      <div className="flex-1 flex items-center justify-end gap-2.5 min-w-0">
-                        {homeTeam ? (
-                          <>
-                            <span className="text-xs font-black text-slate-200 uppercase tracking-wide truncate">{homeTeam.name}</span>
-                            <img src={homeTeam.flag} alt="" className="h-3.5 w-5 object-cover rounded shadow border border-slate-900" />
-                          </>
-                        ) : (
-                          <span className="text-xs font-bold text-slate-500 italic truncate uppercase">{match.homeTeamLabel || 'TBD'}</span>
-                        )}
-                      </div>
-
-                      {/* Score Input Fields */}
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        <input
-                          type="text"
-                          disabled={!isPlayable}
-                          maxLength={2}
-                          value={match.finished ? match.homeScore : inputs.home}
-                          onChange={(e) => handleScoreInputChange(match.id, 'home', e.target.value)}
-                          placeholder="0"
-                          className="h-9 w-9 bg-slate-950/60 border border-slate-850 rounded text-center text-xs font-black focus:outline-none focus:border-emerald-500/50 text-slate-100 disabled:opacity-50 disabled:cursor-not-allowed"
-                        />
-                        <span className="text-slate-600 font-bold">-</span>
-                        <input
-                          type="text"
-                          disabled={!isPlayable}
-                          maxLength={2}
-                          value={match.finished ? match.awayScore : inputs.away}
-                          onChange={(e) => handleScoreInputChange(match.id, 'away', e.target.value)}
-                          placeholder="0"
-                          className="h-9 w-9 bg-slate-950/60 border border-slate-850 rounded text-center text-xs font-black focus:outline-none focus:border-emerald-500/50 text-slate-100 disabled:opacity-50 disabled:cursor-not-allowed"
-                        />
-                      </div>
-
-                      {/* Away */}
-                      <div className="flex-1 flex items-center justify-start gap-2.5 min-w-0">
-                        {awayTeam ? (
-                          <>
-                            <img src={awayTeam.flag} alt="" className="h-3.5 w-5 object-cover rounded shadow border border-slate-900" />
-                            <span className="text-xs font-black text-slate-200 uppercase tracking-wide truncate">{awayTeam.name}</span>
-                          </>
-                        ) : (
-                          <span className="text-xs font-bold text-slate-500 italic truncate uppercase">{match.awayTeamLabel || 'TBD'}</span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Action Button */}
-                    <div className="w-24 shrink-0 text-right">
-                      {match.finished ? (
-                        <div className="inline-flex items-center gap-1 text-[9px] font-black text-emerald-400 bg-emerald-500/5 border border-emerald-500/10 py-1.5 px-3 rounded uppercase tracking-wider">
-                          <CheckCircle className="h-3.5 w-3.5" /> Played
-                        </div>
-                      ) : isPlayable ? (
-                        <button
-                          onClick={() => handleManualRecord(match.id)}
-                          disabled={inputs.home === '' || inputs.away === ''}
-                          className="w-full flex items-center justify-center gap-1 rounded bg-emerald-500 hover:bg-emerald-400 disabled:bg-slate-900 disabled:text-slate-500 disabled:cursor-not-allowed text-slate-950 font-bold py-2 text-[10px] uppercase tracking-wider transition-colors cursor-pointer"
-                        >
-                          Record
-                        </button>
-                      ) : (
-                        <div className="text-[10px] text-slate-500 font-bold italic uppercase border border-slate-900 py-2 text-center rounded">Locked</div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })
-            )}
-          </div>
-        </div>
-      )}
+      </div>
 
       {/* Match Details Popup Modal */}
       {activeMatchDetail && (() => {
@@ -558,17 +377,7 @@ export default function MatchesPage() {
                   )}
                 </div>
 
-                {!match.finished && homeTeam && awayTeam && !liveSyncMode && (
-                  <div className="pt-2">
-                    <button
-                      onClick={() => handleSimulateInPopup(match.id)}
-                      className="w-full flex items-center justify-center gap-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 text-xs uppercase tracking-wider transition-colors shadow-lg shadow-emerald-500/10 cursor-pointer"
-                    >
-                      <Play className="h-4 w-4" />
-                      Simulate Match
-                    </button>
-                  </div>
-                )}
+
 
               </div>
             </div>

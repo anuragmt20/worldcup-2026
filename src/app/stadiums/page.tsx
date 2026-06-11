@@ -73,6 +73,15 @@ export default function StadiumsPage() {
                 {/* Stylized background lines / mesh */}
                 <path d="M 0,0 L 500,350 M 0,350 L 500,0 M 250,0 L 250,350 M 0,175 L 500,175" stroke="rgba(255,255,255,0.02)" strokeWidth="1" />
                 
+                {/* Stylized North America Continental Outline Backdrop */}
+                <path 
+                  d="M 40,50 L 100,45 L 110,65 L 130,70 L 150,55 L 260,55 L 380,60 L 450,50 L 470,80 L 440,115 L 415,115 L 410,122 L 395,138 L 388,165 L 378,195 L 382,240 L 388,270 L 378,285 L 355,255 L 310,245 L 270,245 L 245,260 L 220,285 L 230,320 L 215,310 L 185,285 L 165,235 L 142,205 L 122,185 L 110,160 L 120,120 L 130,90 Z" 
+                  fill="rgba(16, 185, 129, 0.015)" 
+                  stroke="rgba(16, 185, 129, 0.12)" 
+                  strokeWidth="2" 
+                  strokeLinejoin="round"
+                />
+
                 {/* Stylized borders outline mockup */}
                 {/* Canada/USA boundary */}
                 <path d="M 120,80 L 370,80 M 370,80 L 370,120 L 420,120" stroke="rgba(255,255,255,0.05)" strokeWidth="2" strokeDasharray="4 4" fill="none" />
@@ -85,15 +94,20 @@ export default function StadiumsPage() {
                   const isSelected = selectedStadiumId === stadiumId;
                   const stadiumInfo = stadiums.find(s => s.id === stadiumId);
 
-                  let markerColor = 'fill-slate-600 hover:fill-slate-400';
+                  let markerColor = 'stroke-slate-600';
+                  let fieldColor = 'fill-slate-700/40 stroke-slate-600/30';
                   if (isSelected) {
-                    markerColor = 'fill-emerald-400 filter drop-shadow-[0_0_8px_#00FF87]';
+                    markerColor = 'stroke-emerald-400 filter drop-shadow-[0_0_6px_#00FF87]';
+                    fieldColor = 'fill-emerald-500/80 stroke-emerald-300';
                   } else if (stadiumInfo?.countryEn.toLowerCase() === 'united states') {
-                    markerColor = 'fill-blue-500/80 hover:fill-blue-400';
+                    markerColor = 'stroke-blue-500/80 hover:stroke-blue-400';
+                    fieldColor = 'fill-blue-950/40 stroke-blue-500/30';
                   } else if (stadiumInfo?.countryEn.toLowerCase() === 'mexico') {
-                    markerColor = 'fill-emerald-600/80 hover:fill-emerald-400';
+                    markerColor = 'stroke-emerald-600/80 hover:stroke-emerald-400';
+                    fieldColor = 'fill-emerald-950/40 stroke-emerald-500/30';
                   } else {
-                    markerColor = 'fill-red-500/80 hover:fill-red-400';
+                    markerColor = 'stroke-red-500/80 hover:stroke-red-400';
+                    fieldColor = 'fill-red-950/40 stroke-red-500/30';
                   }
 
                   return (
@@ -104,26 +118,51 @@ export default function StadiumsPage() {
                     >
                       {/* Pulse effect for selected city */}
                       {isSelected && (
-                        <circle 
+                        <ellipse 
                           cx={coord.x} 
                           cy={coord.y} 
-                          r="12" 
-                          className="fill-emerald-400/20 animate-ping"
+                          rx="16" 
+                          ry="10" 
+                          className="fill-emerald-400/10 stroke-emerald-400/20 stroke-1 animate-ping"
                         />
                       )}
                       
-                      {/* Main Coordinate Dot */}
-                      <circle 
-                        cx={coord.x} 
-                        cy={coord.y} 
-                        r={isSelected ? '6' : '4.5'} 
-                        className={`transition-all duration-200 ${markerColor}`}
-                      />
+                      {/* Custom Stadium Arena Icon */}
+                      <g transform={`translate(${coord.x}, ${coord.y})`}>
+                        {/* Stadium Outer Bowl */}
+                        <ellipse
+                          cx="0"
+                          cy="0"
+                          rx={isSelected ? "9.5" : "7.5"}
+                          ry={isSelected ? "5.5" : "4.5"}
+                          className={`transition-all duration-200 fill-slate-950/85 stroke-2 ${markerColor}`}
+                        />
+                        {/* Stadium Pitch */}
+                        <ellipse
+                          cx="0"
+                          cy="0"
+                          rx={isSelected ? "5.5" : "4.2"}
+                          ry={isSelected ? "3" : "2.2"}
+                          className={`transition-all duration-200 ${fieldColor}`}
+                          strokeWidth="0.5"
+                        />
+                        {/* Pitch Center Line */}
+                        <line 
+                          x1="0" 
+                          y1={isSelected ? "-3" : "-2.2"} 
+                          x2="0" 
+                          y2={isSelected ? "3" : "2.2"} 
+                          className={`transition-all duration-200 ${
+                            isSelected ? 'stroke-emerald-200/70' : 'stroke-slate-700/50'
+                          }`}
+                          strokeWidth="0.5" 
+                        />
+                      </g>
 
                       {/* City Name Text Label */}
                       <text 
                         x={coord.x} 
-                        y={coord.y - 9} 
+                        y={coord.y - (isSelected ? 10 : 8)} 
                         textAnchor="middle" 
                         className={`text-[8px] font-black uppercase tracking-wider select-none ${isSelected ? 'fill-emerald-400' : 'fill-slate-500'}`}
                       >
@@ -137,88 +176,98 @@ export default function StadiumsPage() {
           </div>
 
           {/* Selected Stadium Details */}
-          <div className="rounded-xl glass-panel p-6 space-y-6">
+          <div className="rounded-xl glass-panel overflow-hidden border border-slate-800/80 shadow-2xl">
+            {/* Stadium Image Banner */}
+            <div className="relative h-48 w-full bg-slate-950/80 overflow-hidden border-b border-slate-900">
+              <img 
+                src={selectedStadium.image || "/images/stadium_placeholder.png"} 
+                alt={selectedStadium.name} 
+                className="h-full w-full object-cover opacity-80"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+            </div>
             
-            {/* Header info */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-900 pb-5">
-              <div className="space-y-1">
-                <div className="text-[10px] font-black tracking-widest text-emerald-400 uppercase">VENUE PROFILE</div>
-                <h2 className="text-xl font-black text-slate-100 uppercase tracking-wide">{selectedStadium.name}</h2>
-                <div className="flex items-center gap-1.5 text-xs text-slate-400">
-                  <MapPin className="h-3.5 w-3.5" />
-                  <span>{selectedStadium.city}, {selectedStadium.countryEn}</span>
+            <div className="p-6 space-y-6">
+              {/* Header info */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-900 pb-5">
+                <div className="space-y-1">
+                  <div className="text-[10px] font-black tracking-widest text-emerald-400 uppercase">VENUE PROFILE</div>
+                  <h2 className="text-xl font-black text-slate-100 uppercase tracking-wide">{selectedStadium.name}</h2>
+                  <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                    <MapPin className="h-3.5 w-3.5" />
+                    <span>{selectedStadium.city}, {selectedStadium.countryEn}</span>
+                  </div>
+                </div>
+
+                <div className={`px-3.5 py-1.5 rounded-full border text-xs font-black uppercase tracking-wider shrink-0 ${getCountryBadgeColor(selectedStadium.countryEn)}`}>
+                  {selectedStadium.countryEn}
                 </div>
               </div>
 
-              <div className={`px-3.5 py-1.5 rounded-full border text-xs font-black uppercase tracking-wider shrink-0 ${getCountryBadgeColor(selectedStadium.countryEn)}`}>
-                {selectedStadium.countryEn}
-              </div>
-            </div>
+              {/* Stats list */}
+              <div className="grid grid-cols-2 gap-4 text-xs">
+                <div className="bg-slate-950/40 p-4 rounded-xl border border-slate-900 space-y-1">
+                  <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Tournament Capacity</span>
+                  <div className="text-lg font-black text-slate-200 flex items-center gap-1.5">
+                    <Users className="h-4 w-4 text-emerald-400" />
+                    {selectedStadium.capacity.toLocaleString()}
+                  </div>
+                </div>
 
-            {/* Stats list */}
-            <div className="grid grid-cols-2 gap-4 text-xs">
-              <div className="bg-slate-950/40 p-4 rounded-xl border border-slate-900 space-y-1">
-                <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Tournament Capacity</span>
-                <div className="text-lg font-black text-slate-200 flex items-center gap-1.5">
-                  <Users className="h-4 w-4 text-emerald-400" />
-                  {selectedStadium.capacity.toLocaleString()}
+                <div className="bg-slate-950/40 p-4 rounded-xl border border-slate-900 space-y-1">
+                  <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Regional Division</span>
+                  <div className="text-lg font-black text-slate-200 flex items-center gap-1.5">
+                    <Flag className="h-4 w-4 text-emerald-400" />
+                    {selectedStadium.region}
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-slate-950/40 p-4 rounded-xl border border-slate-900 space-y-1">
-                <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Regional Division</span>
-                <div className="text-lg font-black text-slate-200 flex items-center gap-1.5">
-                  <Flag className="h-4 w-4 text-emerald-400" />
-                  {selectedStadium.region}
-                </div>
-              </div>
-            </div>
+              {/* Stadium Hosted matches */}
+              <div className="space-y-3">
+                <h3 className="text-[10px] font-extrabold tracking-wider text-slate-500 uppercase flex items-center gap-1">
+                  <Calendar className="h-4 w-4" /> Hosted Matches ({stadiumMatches.length})
+                </h3>
+                
+                <div className="space-y-2.5 max-h-[220px] overflow-y-auto pr-2">
+                  {stadiumMatches.map(match => {
+                    const homeTeam = getTeam(match.homeTeamId);
+                    const awayTeam = getTeam(match.awayTeamId);
 
-            {/* Stadium Hosted matches */}
-            <div className="space-y-3">
-              <h3 className="text-[10px] font-extrabold tracking-wider text-slate-500 uppercase flex items-center gap-1">
-                <Calendar className="h-4 w-4" /> Hosted Matches ({stadiumMatches.length})
-              </h3>
-              
-              <div className="space-y-2.5 max-h-[220px] overflow-y-auto pr-2">
-                {stadiumMatches.map(match => {
-                  const homeTeam = getTeam(match.homeTeamId);
-                  const awayTeam = getTeam(match.awayTeamId);
+                    return (
+                      <div key={match.id} className="flex items-center justify-between p-3.5 rounded-lg bg-slate-950/40 border border-slate-900/60 text-xs">
+                        <div>
+                          <div className="text-[9px] font-bold text-slate-500 uppercase">Match #{match.id} &bull; Group {match.group}</div>
+                          <div className="font-bold text-slate-200 mt-1 flex items-center gap-1.5 uppercase">
+                            {homeTeam ? (
+                              <>
+                                <img src={homeTeam.flag} alt="" className="h-3 w-4.5 object-cover rounded shadow-sm" />
+                                <span>{homeTeam.fifaCode}</span>
+                              </>
+                            ) : <span className="italic">{match.homeTeamLabel || 'TBD'}</span>}
+                            <span className="text-slate-500">VS</span>
+                            {awayTeam ? (
+                              <>
+                                <img src={awayTeam.flag} alt="" className="h-3 w-4.5 object-cover rounded shadow-sm" />
+                                <span>{awayTeam.fifaCode}</span>
+                              </>
+                            ) : <span className="italic">{match.awayTeamLabel || 'TBD'}</span>}
+                          </div>
+                        </div>
 
-                  return (
-                    <div key={match.id} className="flex items-center justify-between p-3.5 rounded-lg bg-slate-950/40 border border-slate-900/60 text-xs">
-                      <div>
-                        <div className="text-[9px] font-bold text-slate-500 uppercase">Match #{match.id} &bull; Group {match.group}</div>
-                        <div className="font-bold text-slate-200 mt-1 flex items-center gap-1.5 uppercase">
-                          {homeTeam ? (
-                            <>
-                              <img src={homeTeam.flag} alt="" className="h-3 w-4.5 object-cover rounded shadow-sm" />
-                              <span>{homeTeam.fifaCode}</span>
-                            </>
-                          ) : <span className="italic">{match.homeTeamLabel || 'TBD'}</span>}
-                          <span className="text-slate-500">VS</span>
-                          {awayTeam ? (
-                            <>
-                              <img src={awayTeam.flag} alt="" className="h-3 w-4.5 object-cover rounded shadow-sm" />
-                              <span>{awayTeam.fifaCode}</span>
-                            </>
-                          ) : <span className="italic">{match.awayTeamLabel || 'TBD'}</span>}
+                        <div className="text-right shrink-0 font-bold text-slate-400">
+                          {match.finished ? (
+                            <span className="text-emerald-400 font-extrabold">{match.homeScore} - {match.awayScore}</span>
+                          ) : (
+                            <span>{match.localDate.split(' ')[0]}</span>
+                          )}
                         </div>
                       </div>
-
-                      <div className="text-right shrink-0 font-bold text-slate-400">
-                        {match.finished ? (
-                          <span className="text-emerald-400 font-extrabold">{match.homeScore} - {match.awayScore}</span>
-                        ) : (
-                          <span>{match.localDate.split(' ')[0]}</span>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
-
           </div>
 
         </div>
@@ -243,7 +292,7 @@ export default function StadiumsPage() {
               >
                 {/* Thumbnail */}
                 <div className="relative h-14 w-20 overflow-hidden rounded-lg bg-slate-950 border border-slate-900 shrink-0">
-                  <img src="/images/stadium_placeholder.png" alt="" className="h-full w-full object-cover opacity-70" />
+                  <img src={stadium.image || "/images/stadium_placeholder.png"} alt="" className="h-full w-full object-cover opacity-70" />
                 </div>
 
                 {/* Details */}

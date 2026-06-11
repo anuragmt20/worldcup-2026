@@ -1,23 +1,4 @@
-import { Team, Stadium, Match } from '../types';
-import footballTeams from '../data/football.teams.json';
-import footballStadiums from '../data/football.stadiums.json';
-import footballMatches from '../data/football.matches.json';
-
-// Get clean and typed teams from JSON source
-export const getTeams = (): Team[] => {
-  return footballTeams.map((t: any) => ({
-    id: t.id,
-    name: t.name_en,
-    nameEn: t.name_en,
-    nameFa: t.name_fa,
-    flag: t.flag || `https://flagcdn.com/w80/${t.iso2.toLowerCase()}.png`,
-    fifaCode: t.fifa_code,
-    iso2: t.iso2,
-    group: t.groups,
-  }));
-};
-
-const STADIUM_IMAGES: { [id: string]: string } = {
+{
   "1": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Vista_a%C3%A9rea_del_Estadio_Azteca_-_2026_-_02.jpg/960px-Vista_a%C3%A9rea_del_Estadio_Azteca_-_2026_-_02.jpg",
   "2": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Estadio_Akron_02-07-2022_cabecera_sur_lado_derecho_%283%29.jpg/960px-Estadio_Akron_02-07-2022_cabecera_sur_lado_derecho_%283%29.jpg",
   "3": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Mexico_Guadalupe_Monterrey_Estadio_BBVA_Bancomer_fifa_world_cup_2026_6.JPG/960px-Mexico_Guadalupe_Monterrey_Estadio_BBVA_Bancomer_fifa_world_cup_2026_6.JPG",
@@ -34,59 +15,4 @@ const STADIUM_IMAGES: { [id: string]: string } = {
   "14": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/2025_FIFA_Club_World_Cup_-_Seattle_Sounders_FC_vs._Atl%C3%A9tico_Madrid_-_05.jpg/960px-2025_FIFA_Club_World_Cup_-_Seattle_Sounders_FC_vs._Atl%C3%A9tico_Madrid_-_05.jpg",
   "15": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Levi%27s_Stadium_in_February_2016_prior_to_Super_Bowl_50_%2824398261729%29.jpg/960px-Levi%27s_Stadium_in_February_2016_prior_to_Super_Bowl_50_%2824398261729%29.jpg",
   "16": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/SoFi_Stadium_2023.jpg/960px-SoFi_Stadium_2023.jpg"
-};
-
-// Get clean and typed stadiums from JSON source
-export const getStadiums = (): Stadium[] => {
-  return footballStadiums.map((s: any) => ({
-    id: s.id,
-    name: s.name_en,
-    nameEn: s.name_en,
-    nameFa: s.name_fa,
-    fifaName: s.fifa_name,
-    city: s.city_en,
-    cityEn: s.city_en,
-    cityFa: s.city_fa,
-    country: s.country_en,
-    countryEn: s.country_en,
-    countryFa: s.country_fa,
-    capacity: Number(s.capacity) || 0,
-    region: s.region,
-    image: STADIUM_IMAGES[s.id] || "/images/stadium_placeholder.png"
-  }));
-};
-
-// Get clean and typed matches from JSON source
-export const getMatches = (): Match[] => {
-  return footballMatches.map((m: any) => {
-    let homeScorers: string[] | null = null;
-    let awayScorers: string[] | null = null;
-    
-    if (m.home_scorers && m.home_scorers !== 'null' && m.home_scorers !== 'None') {
-      homeScorers = Array.isArray(m.home_scorers) ? m.home_scorers : [m.home_scorers];
-    }
-    if (m.away_scorers && m.away_scorers !== 'null' && m.away_scorers !== 'None') {
-      awayScorers = Array.isArray(m.away_scorers) ? m.away_scorers : [m.away_scorers];
-    }
-
-    return {
-      id: m.id,
-      homeTeamId: m.home_team_id,
-      awayTeamId: m.away_team_id,
-      homeScore: Number(m.home_score) || 0,
-      awayScore: Number(m.away_score) || 0,
-      homeScorers,
-      awayScorers,
-      group: m.group,
-      matchday: m.matchday,
-      localDate: m.local_date,
-      persianDate: m.persian_date,
-      stadiumId: m.stadium_id,
-      finished: m.finished === 'TRUE' || m.finished === true,
-      timeElapsed: m.time_elapsed,
-      type: m.type as any,
-      homeTeamLabel: m.home_team_label,
-      awayTeamLabel: m.away_team_label,
-    };
-  });
-};
+}

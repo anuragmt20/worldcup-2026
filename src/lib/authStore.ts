@@ -10,6 +10,9 @@ interface UserProfile {
   points: number;
   correctPredictions: number;
   totalPredictions: number;
+  hasClaimedWelcome?: boolean;
+  checkInStreak?: number;
+  lastCheckInDate?: string | null;
 }
 
 interface AuthState {
@@ -22,6 +25,8 @@ interface AuthState {
   signIn: (email: string, password: string) => Promise<boolean>;
   signOut: () => Promise<void>;
   clearError: () => void;
+  claimWelcomeGift: () => Promise<void>;
+  dailyCheckIn: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set, get) => {
@@ -61,6 +66,9 @@ export const useAuthStore = create<AuthState>((set, get) => {
           points: data.points || 0,
           correctPredictions: data.correct_predictions || 0,
           totalPredictions: data.total_predictions || 0,
+          hasClaimedWelcome: data.has_claimed_welcome || false,
+          checkInStreak: data.check_in_streak || 0,
+          lastCheckInDate: data.last_check_in_date || null
         };
       }
     } catch (err: any) {
@@ -253,6 +261,96 @@ export const useAuthStore = create<AuthState>((set, get) => {
       }
     },
 
-    clearError: () => set({ error: null })
+    clearError: () => set({ error: null }),
+
+    claimWelcomeGift: async () => {
+      const currentUser = get().user;
+      if (!currentUser) return;
+
+      const updatedUser: UserProfile = {
+        ...currentUser,
+        points: (currentUser.points || 0) + 250,
+        hasClaimedWelcome: true
+      };
+
+      set({ user: updatedUser });
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('wc2026_local_user', JSON.stringify(updatedUser));
+      }
+
+      if (isSupabaseConfigured && supabase) {
+        try {
+          const { error } = await supabase.from('profiles').update({
+            points: updatedUser.points,
+            has_claimed_welcome: true
+          }).eq('id', currentUser.id);
+          if (error) throw error;
+        } catch (e) {
+          console.error('Error updating profile in Supabase', e);
+        }
+      }
+    },
+
+    dailyCheckIn: async () => {
+      const currentUser = get().user;
+      if (!currentUser) return;
+
+      const todayStr = new Date().toISOString().split('T')[0];
+      const lastCheckIn = currentUser.lastCheckInDate;
+      
+      let streak = currentUser.checkInStreak || 0;
+      let newStreak = 1;
+      let reward = 100;
+
+      if (lastCheckIn) {
+        const lastDate = new Date(lastCheckIn);
+        const todayDate = new Date(todayStr);
+        const diffTime = Math.abs(todayDate.getTime() - lastDate.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 1) {
+          // Continuous check-in
+          newStreak = streak + 1;
+          if (newStreak > 10) newStreak = 1;
+          reward = newStreak === 10 ? 1000 : 100;
+        } else if (diffDays === 0) {
+          // Already checked in today
+          return;
+        } else {
+          // Missed check-in
+          newStreak = 1;
+          reward = 100;
+        }
+      } else {
+        // First check-in
+        newStreak = 1;
+        reward = 100;
+      }
+
+      const updatedUser: UserProfile = {
+        ...currentUser,
+        points: (currentUser.points || 0) + reward,
+        checkInStreak: newStreak,
+        lastCheckInDate: todayStr
+      };
+
+      set({ user: updatedUser });
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('wc2026_local_user', JSON.stringify(updatedUser));
+      }
+
+      if (isSupabaseConfigured && supabase) {
+        try {
+          const { error } = await supabase.from('profiles').update({
+            points: updatedUser.points,
+            check_in_streak: newStreak,
+            last_check_in_date: todayStr
+          }).eq('id', currentUser.id);
+          if (error) throw error;
+        } catch (e) {
+          console.error('Error updating check-in in Supabase', e);
+        }
+      }
+    }
   };
 });

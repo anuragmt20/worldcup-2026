@@ -1,0 +1,2210 @@
+{
+  "1": [
+    {
+      "name": "G. Ochoa",
+      "pos": "GK"
+    },
+    {
+      "name": "C. Montes",
+      "pos": "DF"
+    },
+    {
+      "name": "J. Vasquez",
+      "pos": "DF"
+    },
+    {
+      "name": "J. Sanchez",
+      "pos": "DF"
+    },
+    {
+      "name": "J. Gallardo",
+      "pos": "DF"
+    },
+    {
+      "name": "E. Alvarez",
+      "pos": "MF"
+    },
+    {
+      "name": "L. Chavez",
+      "pos": "MF"
+    },
+    {
+      "name": "O. Pineda",
+      "pos": "MF"
+    },
+    {
+      "name": "S. Gimenez",
+      "pos": "FW"
+    },
+    {
+      "name": "H. Lozano",
+      "pos": "FW"
+    },
+    {
+      "name": "U. Antuna",
+      "pos": "FW"
+    }
+  ],
+  "2": [
+    {
+      "name": "F. Ondoa",
+      "pos": "GK"
+    },
+    {
+      "name": "K. Kouassi",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Bailly",
+      "pos": "DF"
+    },
+    {
+      "name": "B. Manga",
+      "pos": "DF"
+    },
+    {
+      "name": "C. Mbemba",
+      "pos": "DF"
+    },
+    {
+      "name": "C. Doukoure",
+      "pos": "MF"
+    },
+    {
+      "name": "I. Sangare",
+      "pos": "MF"
+    },
+    {
+      "name": "M. Aguissa",
+      "pos": "MF"
+    },
+    {
+      "name": "F. Diedhiou",
+      "pos": "FW"
+    },
+    {
+      "name": "M. Elia",
+      "pos": "FW"
+    },
+    {
+      "name": "S. Haller",
+      "pos": "FW"
+    }
+  ],
+  "3": [
+    {
+      "name": "Jo Hyeon-woo",
+      "pos": "GK"
+    },
+    {
+      "name": "Kim Min-jae",
+      "pos": "DF"
+    },
+    {
+      "name": "Kim Young-gwon",
+      "pos": "DF"
+    },
+    {
+      "name": "Seol Young-woo",
+      "pos": "DF"
+    },
+    {
+      "name": "Kim Jin-su",
+      "pos": "DF"
+    },
+    {
+      "name": "Hwang In-beom",
+      "pos": "MF"
+    },
+    {
+      "name": "Lee Jae-sung",
+      "pos": "MF"
+    },
+    {
+      "name": "Lee Kang-in",
+      "pos": "MF"
+    },
+    {
+      "name": "Son Heung-min",
+      "pos": "FW"
+    },
+    {
+      "name": "Hwang Hee-chan",
+      "pos": "FW"
+    },
+    {
+      "name": "Cho Gue-sung",
+      "pos": "FW"
+    }
+  ],
+  "4": [
+    {
+      "name": "I. Sehic",
+      "pos": "GK"
+    },
+    {
+      "name": "J. Gazibegovic",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Ahmedhodzic",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Pavlovic",
+      "pos": "DF"
+    },
+    {
+      "name": "N. Milenkovic",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Milinkovic-Savic",
+      "pos": "MF"
+    },
+    {
+      "name": "G. Cimirot",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Krunic",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Mitrovic",
+      "pos": "FW"
+    },
+    {
+      "name": "E. Dzeko",
+      "pos": "FW"
+    },
+    {
+      "name": "H. Tabakovic",
+      "pos": "FW"
+    }
+  ],
+  "5": [
+    {
+      "name": "M. Crepeau",
+      "pos": "GK"
+    },
+    {
+      "name": "A. Johnston",
+      "pos": "DF"
+    },
+    {
+      "name": "K. Miller",
+      "pos": "DF"
+    },
+    {
+      "name": "D. Cornelius",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Davies",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Eustaquio",
+      "pos": "MF"
+    },
+    {
+      "name": "I. Kone",
+      "pos": "MF"
+    },
+    {
+      "name": "J. Shaffelburg",
+      "pos": "MF"
+    },
+    {
+      "name": "J. David",
+      "pos": "FW"
+    },
+    {
+      "name": "C. Larin",
+      "pos": "FW"
+    },
+    {
+      "name": "T. Buchanan",
+      "pos": "FW"
+    }
+  ],
+  "6": [
+    {
+      "name": "I. Sehic",
+      "pos": "GK"
+    },
+    {
+      "name": "J. Gazibegovic",
+      "pos": "DF"
+    },
+    {
+      "name": "D. Hadzikadunic",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Ahmedhodzic",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Kolasinac",
+      "pos": "DF"
+    },
+    {
+      "name": "N. Gudelj",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Krunic",
+      "pos": "MF"
+    },
+    {
+      "name": "S. Milinkovic-Savic",
+      "pos": "MF"
+    },
+    {
+      "name": "L. Jovic",
+      "pos": "FW"
+    },
+    {
+      "name": "A. Mitrovic",
+      "pos": "FW"
+    },
+    {
+      "name": "H. Tabakovic",
+      "pos": "FW"
+    }
+  ],
+  "7": [
+    {
+      "name": "M. Al-Owais",
+      "pos": "GK"
+    },
+    {
+      "name": "Y. Al-Shahrani",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Abdulhamid",
+      "pos": "DF"
+    },
+    {
+      "name": "H. Tambakti",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Al-Breik",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Kanno",
+      "pos": "MF"
+    },
+    {
+      "name": "S. Al-Faraj",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Otayf",
+      "pos": "MF"
+    },
+    {
+      "name": "M. Al-Muwallad",
+      "pos": "FW"
+    },
+    {
+      "name": "A. Ghareeb",
+      "pos": "FW"
+    },
+    {
+      "name": "F. Al-Buraikan",
+      "pos": "FW"
+    }
+  ],
+  "8": [
+    {
+      "name": "Y. Sommer",
+      "pos": "GK"
+    },
+    {
+      "name": "M. Akanji",
+      "pos": "DF"
+    },
+    {
+      "name": "N. Elvedi",
+      "pos": "DF"
+    },
+    {
+      "name": "R. Rodriguez",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Widmer",
+      "pos": "DF"
+    },
+    {
+      "name": "G. Xhaka",
+      "pos": "MF"
+    },
+    {
+      "name": "R. Freuler",
+      "pos": "MF"
+    },
+    {
+      "name": "D. Sow",
+      "pos": "MF"
+    },
+    {
+      "name": "X. Shaqiri",
+      "pos": "FW"
+    },
+    {
+      "name": "B. Embolo",
+      "pos": "FW"
+    },
+    {
+      "name": "Z. Amdouni",
+      "pos": "FW"
+    }
+  ],
+  "9": [
+    {
+      "name": "Alisson Becker",
+      "pos": "GK"
+    },
+    {
+      "name": "Marquinhos",
+      "pos": "DF"
+    },
+    {
+      "name": "Gabriel Magalhaes",
+      "pos": "DF"
+    },
+    {
+      "name": "Danilo",
+      "pos": "DF"
+    },
+    {
+      "name": "Yan Couto",
+      "pos": "DF"
+    },
+    {
+      "name": "Bruno Guimaraes",
+      "pos": "MF"
+    },
+    {
+      "name": "Douglas Luiz",
+      "pos": "MF"
+    },
+    {
+      "name": "Lucas Paqueta",
+      "pos": "MF"
+    },
+    {
+      "name": "Vinicius Jr",
+      "pos": "FW"
+    },
+    {
+      "name": "Rodrygo Goes",
+      "pos": "FW"
+    },
+    {
+      "name": "Raphinha",
+      "pos": "FW"
+    }
+  ],
+  "10": [
+    {
+      "name": "Yassine Bounou",
+      "pos": "GK"
+    },
+    {
+      "name": "Achraf Hakimi",
+      "pos": "DF"
+    },
+    {
+      "name": "Nayef Aguerd",
+      "pos": "DF"
+    },
+    {
+      "name": "Romain Saiss",
+      "pos": "DF"
+    },
+    {
+      "name": "Noussair Mazraoui",
+      "pos": "DF"
+    },
+    {
+      "name": "Sofyan Amrabat",
+      "pos": "MF"
+    },
+    {
+      "name": "Azzedine Ounahi",
+      "pos": "MF"
+    },
+    {
+      "name": "Selim Amallah",
+      "pos": "MF"
+    },
+    {
+      "name": "Hakim Ziyech",
+      "pos": "FW"
+    },
+    {
+      "name": "Youssef En-Nesyri",
+      "pos": "FW"
+    },
+    {
+      "name": "Amine Adli",
+      "pos": "FW"
+    }
+  ],
+  "11": [
+    {
+      "name": "F. Ondoa",
+      "pos": "GK"
+    },
+    {
+      "name": "S. Bailly",
+      "pos": "DF"
+    },
+    {
+      "name": "C. Mbemba",
+      "pos": "DF"
+    },
+    {
+      "name": "J. Moukoudi",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Toure",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Aguissa",
+      "pos": "MF"
+    },
+    {
+      "name": "S. Moutoussamy",
+      "pos": "MF"
+    },
+    {
+      "name": "C. Doukoure",
+      "pos": "MF"
+    },
+    {
+      "name": "M. Elia",
+      "pos": "FW"
+    },
+    {
+      "name": "Y. Wissa",
+      "pos": "FW"
+    },
+    {
+      "name": "F. Diedhiou",
+      "pos": "FW"
+    }
+  ],
+  "12": [
+    {
+      "name": "C. Wood",
+      "pos": "GK"
+    },
+    {
+      "name": "M. Keane",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Morrison",
+      "pos": "DF"
+    },
+    {
+      "name": "T. Davies",
+      "pos": "DF"
+    },
+    {
+      "name": "C. Carter",
+      "pos": "DF"
+    },
+    {
+      "name": "C. Jones",
+      "pos": "MF"
+    },
+    {
+      "name": "H. Macdonald",
+      "pos": "MF"
+    },
+    {
+      "name": "O. Cooper",
+      "pos": "MF"
+    },
+    {
+      "name": "K. Marshall",
+      "pos": "FW"
+    },
+    {
+      "name": "S. Reid",
+      "pos": "FW"
+    },
+    {
+      "name": "A. Campbell",
+      "pos": "FW"
+    }
+  ],
+  "13": [
+    {
+      "name": "Matt Turner",
+      "pos": "GK"
+    },
+    {
+      "name": "Tim Ream",
+      "pos": "DF"
+    },
+    {
+      "name": "Chris Richards",
+      "pos": "DF"
+    },
+    {
+      "name": "Antonee Robinson",
+      "pos": "DF"
+    },
+    {
+      "name": "Sergino Dest",
+      "pos": "DF"
+    },
+    {
+      "name": "Tyler Adams",
+      "pos": "MF"
+    },
+    {
+      "name": "Weston McKennie",
+      "pos": "MF"
+    },
+    {
+      "name": "Yunus Musah",
+      "pos": "MF"
+    },
+    {
+      "name": "Christian Pulisic",
+      "pos": "FW"
+    },
+    {
+      "name": "Folarin Balogun",
+      "pos": "FW"
+    },
+    {
+      "name": "Timothy Weah",
+      "pos": "FW"
+    }
+  ],
+  "14": [
+    {
+      "name": "M. Lopez",
+      "pos": "GK"
+    },
+    {
+      "name": "D. Perez",
+      "pos": "DF"
+    },
+    {
+      "name": "F. Morales",
+      "pos": "DF"
+    },
+    {
+      "name": "J. Diaz",
+      "pos": "DF"
+    },
+    {
+      "name": "E. Ruiz",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Cardona",
+      "pos": "MF"
+    },
+    {
+      "name": "E. Ortiz",
+      "pos": "MF"
+    },
+    {
+      "name": "D. Mendoza",
+      "pos": "MF"
+    },
+    {
+      "name": "E. Valencia",
+      "pos": "FW"
+    },
+    {
+      "name": "J. Quintero",
+      "pos": "FW"
+    },
+    {
+      "name": "M. Moreno",
+      "pos": "FW"
+    }
+  ],
+  "15": [
+    {
+      "name": "Mathew Ryan",
+      "pos": "GK"
+    },
+    {
+      "name": "Harry Souttar",
+      "pos": "DF"
+    },
+    {
+      "name": "Kye Rowles",
+      "pos": "DF"
+    },
+    {
+      "name": "Aziz Behich",
+      "pos": "DF"
+    },
+    {
+      "name": "Gethin Jones",
+      "pos": "DF"
+    },
+    {
+      "name": "Jackson Irvine",
+      "pos": "MF"
+    },
+    {
+      "name": "Keanu Baccus",
+      "pos": "MF"
+    },
+    {
+      "name": "Connor Metcalfe",
+      "pos": "MF"
+    },
+    {
+      "name": "Mitchell Duke",
+      "pos": "FW"
+    },
+    {
+      "name": "Craig Goodwin",
+      "pos": "FW"
+    },
+    {
+      "name": "Martin Boyle",
+      "pos": "FW"
+    }
+  ],
+  "16": [
+    {
+      "name": "Altay Bayindir",
+      "pos": "GK"
+    },
+    {
+      "name": "Merih Demiral",
+      "pos": "DF"
+    },
+    {
+      "name": "Abdulkerim Bardakci",
+      "pos": "DF"
+    },
+    {
+      "name": "Ferdi Kadioglu",
+      "pos": "DF"
+    },
+    {
+      "name": "Zeki Celik",
+      "pos": "DF"
+    },
+    {
+      "name": "Hakan Calhanoglu",
+      "pos": "MF"
+    },
+    {
+      "name": "Salih Ozcan",
+      "pos": "MF"
+    },
+    {
+      "name": "Orkun Kokcu",
+      "pos": "MF"
+    },
+    {
+      "name": "Kenan Yildiz",
+      "pos": "FW"
+    },
+    {
+      "name": "Arda Guler",
+      "pos": "FW"
+    },
+    {
+      "name": "Baris Alper Yilmaz",
+      "pos": "FW"
+    }
+  ],
+  "17": [
+    {
+      "name": "Manuel Neuer",
+      "pos": "GK"
+    },
+    {
+      "name": "Antonio Rudiger",
+      "pos": "DF"
+    },
+    {
+      "name": "Jonathan Tah",
+      "pos": "DF"
+    },
+    {
+      "name": "Joshua Kimmich",
+      "pos": "DF"
+    },
+    {
+      "name": "David Raum",
+      "pos": "DF"
+    },
+    {
+      "name": "Robert Andrich",
+      "pos": "MF"
+    },
+    {
+      "name": "Toni Kroos",
+      "pos": "MF"
+    },
+    {
+      "name": "Ilkay Gundogan",
+      "pos": "MF"
+    },
+    {
+      "name": "Jamal Musiala",
+      "pos": "FW"
+    },
+    {
+      "name": "Florian Wirtz",
+      "pos": "FW"
+    },
+    {
+      "name": "Kai Havertz",
+      "pos": "FW"
+    }
+  ],
+  "18": [
+    {
+      "name": "A. Rodriguez",
+      "pos": "GK"
+    },
+    {
+      "name": "F. Morales",
+      "pos": "DF"
+    },
+    {
+      "name": "J. Silva",
+      "pos": "DF"
+    },
+    {
+      "name": "C. Martinez",
+      "pos": "DF"
+    },
+    {
+      "name": "E. Ruiz",
+      "pos": "DF"
+    },
+    {
+      "name": "H. Suarez",
+      "pos": "MF"
+    },
+    {
+      "name": "L. Gonzalez",
+      "pos": "MF"
+    },
+    {
+      "name": "C. Castro",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Valencia",
+      "pos": "FW"
+    },
+    {
+      "name": "G. Guerrero",
+      "pos": "FW"
+    },
+    {
+      "name": "S. Cordoba",
+      "pos": "FW"
+    }
+  ],
+  "19": [
+    {
+      "name": "M. Diallo",
+      "pos": "GK"
+    },
+    {
+      "name": "D. Dakonam",
+      "pos": "DF"
+    },
+    {
+      "name": "C. Mbemba",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Toure",
+      "pos": "DF"
+    },
+    {
+      "name": "K. Kouassi",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Moutoussamy",
+      "pos": "MF"
+    },
+    {
+      "name": "C. Doukoure",
+      "pos": "MF"
+    },
+    {
+      "name": "M. Aguissa",
+      "pos": "MF"
+    },
+    {
+      "name": "M. Elia",
+      "pos": "FW"
+    },
+    {
+      "name": "S. Haller",
+      "pos": "FW"
+    },
+    {
+      "name": "C. Bakambu",
+      "pos": "FW"
+    }
+  ],
+  "20": [
+    {
+      "name": "J. Hernandez",
+      "pos": "GK"
+    },
+    {
+      "name": "E. Ruiz",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Sanchez",
+      "pos": "DF"
+    },
+    {
+      "name": "F. Morales",
+      "pos": "DF"
+    },
+    {
+      "name": "J. Silva",
+      "pos": "DF"
+    },
+    {
+      "name": "D. Mendoza",
+      "pos": "MF"
+    },
+    {
+      "name": "M. Cardona",
+      "pos": "MF"
+    },
+    {
+      "name": "E. Ortiz",
+      "pos": "MF"
+    },
+    {
+      "name": "G. Guerrero",
+      "pos": "FW"
+    },
+    {
+      "name": "A. Valencia",
+      "pos": "FW"
+    },
+    {
+      "name": "E. Valencia",
+      "pos": "FW"
+    }
+  ],
+  "21": [
+    {
+      "name": "Bart Verbruggen",
+      "pos": "GK"
+    },
+    {
+      "name": "Virgil van Dijk",
+      "pos": "DF"
+    },
+    {
+      "name": "Nathan Ake",
+      "pos": "DF"
+    },
+    {
+      "name": "Stefan de Vrij",
+      "pos": "DF"
+    },
+    {
+      "name": "Denzel Dumfries",
+      "pos": "DF"
+    },
+    {
+      "name": "Jerdy Schouten",
+      "pos": "MF"
+    },
+    {
+      "name": "Tijjani Reijnders",
+      "pos": "MF"
+    },
+    {
+      "name": "Joey Veerman",
+      "pos": "MF"
+    },
+    {
+      "name": "Cody Gakpo",
+      "pos": "FW"
+    },
+    {
+      "name": "Memphis Depay",
+      "pos": "FW"
+    },
+    {
+      "name": "Xavi Simons",
+      "pos": "FW"
+    }
+  ],
+  "22": [
+    {
+      "name": "Zion Suzuki",
+      "pos": "GK"
+    },
+    {
+      "name": "Ko Itakura",
+      "pos": "DF"
+    },
+    {
+      "name": "Takehiro Tomiyasu",
+      "pos": "DF"
+    },
+    {
+      "name": "Yukinari Sugawara",
+      "pos": "DF"
+    },
+    {
+      "name": "Hiroki Ito",
+      "pos": "DF"
+    },
+    {
+      "name": "Wataru Endo",
+      "pos": "MF"
+    },
+    {
+      "name": "Hidemasa Morita",
+      "pos": "MF"
+    },
+    {
+      "name": "Daichi Kamada",
+      "pos": "MF"
+    },
+    {
+      "name": "Takefusa Kubo",
+      "pos": "FW"
+    },
+    {
+      "name": "Kaoru Mitoma",
+      "pos": "FW"
+    },
+    {
+      "name": "Takumi Minamino",
+      "pos": "FW"
+    }
+  ],
+  "23": [
+    {
+      "name": "J. Smith",
+      "pos": "GK"
+    },
+    {
+      "name": "M. Keane",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Morrison",
+      "pos": "DF"
+    },
+    {
+      "name": "D. Ward",
+      "pos": "DF"
+    },
+    {
+      "name": "C. Carter",
+      "pos": "DF"
+    },
+    {
+      "name": "L. Evans",
+      "pos": "MF"
+    },
+    {
+      "name": "C. Jones",
+      "pos": "MF"
+    },
+    {
+      "name": "O. Cooper",
+      "pos": "MF"
+    },
+    {
+      "name": "K. Marshall",
+      "pos": "FW"
+    },
+    {
+      "name": "B. Mckay",
+      "pos": "FW"
+    },
+    {
+      "name": "J. Brown",
+      "pos": "FW"
+    }
+  ],
+  "24": [
+    {
+      "name": "M. Al-Owais",
+      "pos": "GK"
+    },
+    {
+      "name": "H. Tambakti",
+      "pos": "DF"
+    },
+    {
+      "name": "Y. Al-Shahrani",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Abdulhamid",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Al-Bulayhi",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Kanno",
+      "pos": "MF"
+    },
+    {
+      "name": "S. Al-Faraj",
+      "pos": "MF"
+    },
+    {
+      "name": "H. Al-Harbi",
+      "pos": "MF"
+    },
+    {
+      "name": "M. Al-Muwallad",
+      "pos": "FW"
+    },
+    {
+      "name": "F. Al-Buraikan",
+      "pos": "FW"
+    },
+    {
+      "name": "A. Afif",
+      "pos": "FW"
+    }
+  ],
+  "25": [
+    {
+      "name": "Koen Casteels",
+      "pos": "GK"
+    },
+    {
+      "name": "Jan Vertonghen",
+      "pos": "DF"
+    },
+    {
+      "name": "Wout Faes",
+      "pos": "DF"
+    },
+    {
+      "name": "Timothy Castagne",
+      "pos": "DF"
+    },
+    {
+      "name": "Arthur Theate",
+      "pos": "DF"
+    },
+    {
+      "name": "Amadou Onana",
+      "pos": "MF"
+    },
+    {
+      "name": "Orel Mangala",
+      "pos": "MF"
+    },
+    {
+      "name": "Kevin De Bruyne",
+      "pos": "MF"
+    },
+    {
+      "name": "Jeremy Doku",
+      "pos": "FW"
+    },
+    {
+      "name": "Romelu Lukaku",
+      "pos": "FW"
+    },
+    {
+      "name": "Leandro Trossard",
+      "pos": "FW"
+    }
+  ],
+  "26": [
+    {
+      "name": "M. El Shenawy",
+      "pos": "GK"
+    },
+    {
+      "name": "M. Abdelmonem",
+      "pos": "DF"
+    },
+    {
+      "name": "Ahmed Hegazi",
+      "pos": "DF"
+    },
+    {
+      "name": "Mohamed Hany",
+      "pos": "DF"
+    },
+    {
+      "name": "Mohamed Hamdy",
+      "pos": "DF"
+    },
+    {
+      "name": "Mohamed Elneny",
+      "pos": "MF"
+    },
+    {
+      "name": "Hamdi Fathi",
+      "pos": "MF"
+    },
+    {
+      "name": "Marwan Attia",
+      "pos": "MF"
+    },
+    {
+      "name": "Mohamed Salah",
+      "pos": "FW"
+    },
+    {
+      "name": "Omar Marmoush",
+      "pos": "FW"
+    },
+    {
+      "name": "Mostafa Mohamed",
+      "pos": "FW"
+    }
+  ],
+  "27": [
+    {
+      "name": "Alireza Beiranvand",
+      "pos": "GK"
+    },
+    {
+      "name": "Shojae Khalilzadeh",
+      "pos": "DF"
+    },
+    {
+      "name": "Hossein Kanaanizadegan",
+      "pos": "DF"
+    },
+    {
+      "name": "Ramin Rezaeian",
+      "pos": "DF"
+    },
+    {
+      "name": "Milad Mohammadi",
+      "pos": "DF"
+    },
+    {
+      "name": "Saeid Ezatolahi",
+      "pos": "MF"
+    },
+    {
+      "name": "Saman Ghoddos",
+      "pos": "MF"
+    },
+    {
+      "name": "Alireza Jahanbakhsh",
+      "pos": "MF"
+    },
+    {
+      "name": "Mehdi Taremi",
+      "pos": "FW"
+    },
+    {
+      "name": "Sardar Azmoun",
+      "pos": "FW"
+    },
+    {
+      "name": "Ali Gholizadeh",
+      "pos": "FW"
+    }
+  ],
+  "28": [
+    {
+      "name": "J. Smith",
+      "pos": "GK"
+    },
+    {
+      "name": "S. Morrison",
+      "pos": "DF"
+    },
+    {
+      "name": "D. Ward",
+      "pos": "DF"
+    },
+    {
+      "name": "J. Miller",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Keane",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Allen",
+      "pos": "MF"
+    },
+    {
+      "name": "L. Evans",
+      "pos": "MF"
+    },
+    {
+      "name": "O. Cooper",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Campbell",
+      "pos": "FW"
+    },
+    {
+      "name": "J. Brown",
+      "pos": "FW"
+    },
+    {
+      "name": "B. Mckay",
+      "pos": "FW"
+    }
+  ],
+  "29": [
+    {
+      "name": "Unai Simon",
+      "pos": "GK"
+    },
+    {
+      "name": "Robin Le Normand",
+      "pos": "DF"
+    },
+    {
+      "name": "Aymeric Laporte",
+      "pos": "DF"
+    },
+    {
+      "name": "Dani Carvajal",
+      "pos": "DF"
+    },
+    {
+      "name": "Marc Cucurella",
+      "pos": "DF"
+    },
+    {
+      "name": "Rodri Hernandez",
+      "pos": "MF"
+    },
+    {
+      "name": "Fabian Ruiz",
+      "pos": "MF"
+    },
+    {
+      "name": "Pedri Gonzalez",
+      "pos": "MF"
+    },
+    {
+      "name": "Lamine Yamal",
+      "pos": "FW"
+    },
+    {
+      "name": "Nico Williams",
+      "pos": "FW"
+    },
+    {
+      "name": "Alvaro Morata",
+      "pos": "FW"
+    }
+  ],
+  "30": [
+    {
+      "name": "M. Diallo",
+      "pos": "GK"
+    },
+    {
+      "name": "J. Moukoudi",
+      "pos": "DF"
+    },
+    {
+      "name": "B. Manga",
+      "pos": "DF"
+    },
+    {
+      "name": "C. Mbemba",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Bailly",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Aguissa",
+      "pos": "MF"
+    },
+    {
+      "name": "Y. Moutoussamy",
+      "pos": "MF"
+    },
+    {
+      "name": "G. Imbula",
+      "pos": "MF"
+    },
+    {
+      "name": "F. Diedhiou",
+      "pos": "FW"
+    },
+    {
+      "name": "J. Krasso",
+      "pos": "FW"
+    },
+    {
+      "name": "M. Elia",
+      "pos": "FW"
+    }
+  ],
+  "31": [
+    {
+      "name": "A. Al-Saeed",
+      "pos": "GK"
+    },
+    {
+      "name": "S. Abdulhamid",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Al-Breik",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Al-Bulayhi",
+      "pos": "DF"
+    },
+    {
+      "name": "H. Tambakti",
+      "pos": "DF"
+    },
+    {
+      "name": "H. Al-Harbi",
+      "pos": "MF"
+    },
+    {
+      "name": "S. Al-Faraj",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Al-Malki",
+      "pos": "MF"
+    },
+    {
+      "name": "M. Al-Muwallad",
+      "pos": "FW"
+    },
+    {
+      "name": "S. Al-Dawsari",
+      "pos": "FW"
+    },
+    {
+      "name": "F. Al-Buraikan",
+      "pos": "FW"
+    }
+  ],
+  "32": [
+    {
+      "name": "Sergio Rochet",
+      "pos": "GK"
+    },
+    {
+      "name": "Ronald Araujo",
+      "pos": "DF"
+    },
+    {
+      "name": "Jose Maria Gimenez",
+      "pos": "DF"
+    },
+    {
+      "name": "Matias Vina",
+      "pos": "DF"
+    },
+    {
+      "name": "Mathias Olivera",
+      "pos": "DF"
+    },
+    {
+      "name": "Federico Valverde",
+      "pos": "MF"
+    },
+    {
+      "name": "Manuel Ugarte",
+      "pos": "MF"
+    },
+    {
+      "name": "Nicolas de la Cruz",
+      "pos": "MF"
+    },
+    {
+      "name": "Darwin Nunez",
+      "pos": "FW"
+    },
+    {
+      "name": "Facundo Pellistri",
+      "pos": "FW"
+    },
+    {
+      "name": "Luis Suarez",
+      "pos": "FW"
+    }
+  ],
+  "33": [
+    {
+      "name": "Mike Maignan",
+      "pos": "GK"
+    },
+    {
+      "name": "Dayot Upamecano",
+      "pos": "DF"
+    },
+    {
+      "name": "William Saliba",
+      "pos": "DF"
+    },
+    {
+      "name": "Jules Kounde",
+      "pos": "DF"
+    },
+    {
+      "name": "Theo Hernandez",
+      "pos": "DF"
+    },
+    {
+      "name": "Aurelien Tchouameni",
+      "pos": "MF"
+    },
+    {
+      "name": "N'Golo Kante",
+      "pos": "MF"
+    },
+    {
+      "name": "Adrien Rabiot",
+      "pos": "MF"
+    },
+    {
+      "name": "Antoine Griezmann",
+      "pos": "FW"
+    },
+    {
+      "name": "Kylian Mbappe",
+      "pos": "FW"
+    },
+    {
+      "name": "Ousmane Dembele",
+      "pos": "FW"
+    }
+  ],
+  "34": [
+    {
+      "name": "Edouard Mendy",
+      "pos": "GK"
+    },
+    {
+      "name": "Kalidou Koulibaly",
+      "pos": "DF"
+    },
+    {
+      "name": "Abdou Diallo",
+      "pos": "DF"
+    },
+    {
+      "name": "Youssouf Sabaly",
+      "pos": "DF"
+    },
+    {
+      "name": "Ismail Jakobs",
+      "pos": "DF"
+    },
+    {
+      "name": "Idrissa Gueye",
+      "pos": "MF"
+    },
+    {
+      "name": "Nampalys Mendy",
+      "pos": "MF"
+    },
+    {
+      "name": "Pape Sarr",
+      "pos": "MF"
+    },
+    {
+      "name": "Sadio Mane",
+      "pos": "FW"
+    },
+    {
+      "name": "Ismaila Sarr",
+      "pos": "FW"
+    },
+    {
+      "name": "Nicolas Jackson",
+      "pos": "FW"
+    }
+  ],
+  "35": [
+    {
+      "name": "A. Al-Saeed",
+      "pos": "GK"
+    },
+    {
+      "name": "M. Al-Breik",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Madibo",
+      "pos": "DF"
+    },
+    {
+      "name": "Y. Al-Shahrani",
+      "pos": "DF"
+    },
+    {
+      "name": "H. Tambakti",
+      "pos": "DF"
+    },
+    {
+      "name": "H. Al-Harbi",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Al-Malki",
+      "pos": "MF"
+    },
+    {
+      "name": "B. Al-Ahbabi",
+      "pos": "MF"
+    },
+    {
+      "name": "S. Al-Dawsari",
+      "pos": "FW"
+    },
+    {
+      "name": "M. Al-Muwallad",
+      "pos": "FW"
+    },
+    {
+      "name": "A. Ghareeb",
+      "pos": "FW"
+    }
+  ],
+  "36": [
+    {
+      "name": "Orjan Nyland",
+      "pos": "GK"
+    },
+    {
+      "name": "Leo Ostigard",
+      "pos": "DF"
+    },
+    {
+      "name": "Kristoffer Ajer",
+      "pos": "DF"
+    },
+    {
+      "name": "Julian Ryerson",
+      "pos": "DF"
+    },
+    {
+      "name": "Fredrik Bjorkan",
+      "pos": "DF"
+    },
+    {
+      "name": "Martin Odegaard",
+      "pos": "MF"
+    },
+    {
+      "name": "Sander Berge",
+      "pos": "MF"
+    },
+    {
+      "name": "Patrick Berg",
+      "pos": "MF"
+    },
+    {
+      "name": "Erling Haaland",
+      "pos": "FW"
+    },
+    {
+      "name": "Alexander Sorloth",
+      "pos": "FW"
+    },
+    {
+      "name": "Oscar Bobb",
+      "pos": "FW"
+    }
+  ],
+  "37": [
+    {
+      "name": "Emiliano Martinez",
+      "pos": "GK"
+    },
+    {
+      "name": "Cristian Romero",
+      "pos": "DF"
+    },
+    {
+      "name": "Nicolas Otamendi",
+      "pos": "DF"
+    },
+    {
+      "name": "Nahuel Molina",
+      "pos": "DF"
+    },
+    {
+      "name": "Nicolas Tagliafico",
+      "pos": "DF"
+    },
+    {
+      "name": "Rodrigo De Paul",
+      "pos": "MF"
+    },
+    {
+      "name": "Alexis Mac Allister",
+      "pos": "MF"
+    },
+    {
+      "name": "Enzo Fernandez",
+      "pos": "MF"
+    },
+    {
+      "name": "Lionel Messi",
+      "pos": "FW"
+    },
+    {
+      "name": "Julian Alvarez",
+      "pos": "FW"
+    },
+    {
+      "name": "Angel Di Maria",
+      "pos": "FW"
+    }
+  ],
+  "38": [
+    {
+      "name": "A. Al-Saeed",
+      "pos": "GK"
+    },
+    {
+      "name": "A. Al-Bulayhi",
+      "pos": "DF"
+    },
+    {
+      "name": "Y. Al-Shahrani",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Abdulhamid",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Madibo",
+      "pos": "DF"
+    },
+    {
+      "name": "B. Al-Ahbabi",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Otayf",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Al-Malki",
+      "pos": "MF"
+    },
+    {
+      "name": "M. Al-Muwallad",
+      "pos": "FW"
+    },
+    {
+      "name": "S. Al-Dawsari",
+      "pos": "FW"
+    },
+    {
+      "name": "F. Al-Buraikan",
+      "pos": "FW"
+    }
+  ],
+  "39": [
+    {
+      "name": "D. Henderson",
+      "pos": "GK"
+    },
+    {
+      "name": "B. White",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Keane",
+      "pos": "DF"
+    },
+    {
+      "name": "D. Ward",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Morrison",
+      "pos": "DF"
+    },
+    {
+      "name": "L. Evans",
+      "pos": "MF"
+    },
+    {
+      "name": "H. Macdonald",
+      "pos": "MF"
+    },
+    {
+      "name": "R. Watson",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Campbell",
+      "pos": "FW"
+    },
+    {
+      "name": "J. Brown",
+      "pos": "FW"
+    },
+    {
+      "name": "B. Mckay",
+      "pos": "FW"
+    }
+  ],
+  "40": [
+    {
+      "name": "H. Hassan",
+      "pos": "GK"
+    },
+    {
+      "name": "Y. Al-Shahrani",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Abdulhamid",
+      "pos": "DF"
+    },
+    {
+      "name": "H. Tambakti",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Madibo",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Al-Faraj",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Otayf",
+      "pos": "MF"
+    },
+    {
+      "name": "A. Al-Malki",
+      "pos": "MF"
+    },
+    {
+      "name": "M. Al-Muwallad",
+      "pos": "FW"
+    },
+    {
+      "name": "S. Al-Dawsari",
+      "pos": "FW"
+    },
+    {
+      "name": "F. Al-Buraikan",
+      "pos": "FW"
+    }
+  ],
+  "41": [
+    {
+      "name": "Diogo Costa",
+      "pos": "GK"
+    },
+    {
+      "name": "Ruben Dias",
+      "pos": "DF"
+    },
+    {
+      "name": "Pepe",
+      "pos": "DF"
+    },
+    {
+      "name": "Joao Cancelo",
+      "pos": "DF"
+    },
+    {
+      "name": "Nuno Mendes",
+      "pos": "DF"
+    },
+    {
+      "name": "Joao Palhinha",
+      "pos": "MF"
+    },
+    {
+      "name": "Bruno Fernandes",
+      "pos": "MF"
+    },
+    {
+      "name": "Vitinha",
+      "pos": "MF"
+    },
+    {
+      "name": "Cristiano Ronaldo",
+      "pos": "FW"
+    },
+    {
+      "name": "Bernardo Silva",
+      "pos": "FW"
+    },
+    {
+      "name": "Rafael Leao",
+      "pos": "FW"
+    }
+  ],
+  "42": [
+    {
+      "name": "J. Samba",
+      "pos": "GK"
+    },
+    {
+      "name": "B. Manga",
+      "pos": "DF"
+    },
+    {
+      "name": "D. Dakonam",
+      "pos": "DF"
+    },
+    {
+      "name": "C. Mbemba",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Toure",
+      "pos": "DF"
+    },
+    {
+      "name": "G. Imbula",
+      "pos": "MF"
+    },
+    {
+      "name": "Y. Moutoussamy",
+      "pos": "MF"
+    },
+    {
+      "name": "I. Sangare",
+      "pos": "MF"
+    },
+    {
+      "name": "F. Diedhiou",
+      "pos": "FW"
+    },
+    {
+      "name": "J. Krasso",
+      "pos": "FW"
+    },
+    {
+      "name": "C. Bakambu",
+      "pos": "FW"
+    }
+  ],
+  "43": [
+    {
+      "name": "J. Kim",
+      "pos": "GK"
+    },
+    {
+      "name": "F. Al-Ghabri",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Al-Habsi",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Al-Busaidi",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Young",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Al-Saadi",
+      "pos": "MF"
+    },
+    {
+      "name": "W. Al-Subhi",
+      "pos": "MF"
+    },
+    {
+      "name": "J. Al-Yahmadi",
+      "pos": "MF"
+    },
+    {
+      "name": "K. Al-Yajiki",
+      "pos": "FW"
+    },
+    {
+      "name": "S. Min",
+      "pos": "FW"
+    },
+    {
+      "name": "A. Al-Ghassani",
+      "pos": "FW"
+    }
+  ],
+  "44": [
+    {
+      "name": "Camilo Vargas",
+      "pos": "GK"
+    },
+    {
+      "name": "Davinson Sanchez",
+      "pos": "DF"
+    },
+    {
+      "name": "Carlos Cuesta",
+      "pos": "DF"
+    },
+    {
+      "name": "Daniel Munoz",
+      "pos": "DF"
+    },
+    {
+      "name": "Johan Mojica",
+      "pos": "DF"
+    },
+    {
+      "name": "Jefferson Lerma",
+      "pos": "MF"
+    },
+    {
+      "name": "Richard Rios",
+      "pos": "MF"
+    },
+    {
+      "name": "Jhon Arias",
+      "pos": "MF"
+    },
+    {
+      "name": "James Rodriguez",
+      "pos": "FW"
+    },
+    {
+      "name": "Luis Diaz",
+      "pos": "FW"
+    },
+    {
+      "name": "Jhon Duran",
+      "pos": "FW"
+    }
+  ],
+  "45": [
+    {
+      "name": "Jordan Pickford",
+      "pos": "GK"
+    },
+    {
+      "name": "John Stones",
+      "pos": "DF"
+    },
+    {
+      "name": "Marc Guehi",
+      "pos": "DF"
+    },
+    {
+      "name": "Kyle Walker",
+      "pos": "DF"
+    },
+    {
+      "name": "Kieran Trippier",
+      "pos": "DF"
+    },
+    {
+      "name": "Declan Rice",
+      "pos": "MF"
+    },
+    {
+      "name": "Kobbie Mainoo",
+      "pos": "MF"
+    },
+    {
+      "name": "Jude Bellingham",
+      "pos": "MF"
+    },
+    {
+      "name": "Bukayo Saka",
+      "pos": "FW"
+    },
+    {
+      "name": "Phil Foden",
+      "pos": "FW"
+    },
+    {
+      "name": "Harry Kane",
+      "pos": "FW"
+    }
+  ],
+  "46": [
+    {
+      "name": "Dominik Livakovic",
+      "pos": "GK"
+    },
+    {
+      "name": "Josko Gvardiol",
+      "pos": "DF"
+    },
+    {
+      "name": "Josip Sutalo",
+      "pos": "DF"
+    },
+    {
+      "name": "Josip Stanisic",
+      "pos": "DF"
+    },
+    {
+      "name": "Marin Pongracic",
+      "pos": "DF"
+    },
+    {
+      "name": "Luka Modric",
+      "pos": "MF"
+    },
+    {
+      "name": "Mateo Kovacic",
+      "pos": "MF"
+    },
+    {
+      "name": "Marcelo Brozovic",
+      "pos": "MF"
+    },
+    {
+      "name": "Andrej Kramaric",
+      "pos": "FW"
+    },
+    {
+      "name": "Ivan Perisic",
+      "pos": "FW"
+    },
+    {
+      "name": "Ante Budimir",
+      "pos": "FW"
+    }
+  ],
+  "47": [
+    {
+      "name": "M. Diallo",
+      "pos": "GK"
+    },
+    {
+      "name": "A. Toure",
+      "pos": "DF"
+    },
+    {
+      "name": "B. Manga",
+      "pos": "DF"
+    },
+    {
+      "name": "C. Mbemba",
+      "pos": "DF"
+    },
+    {
+      "name": "J. Moukoudi",
+      "pos": "DF"
+    },
+    {
+      "name": "S. Moutoussamy",
+      "pos": "MF"
+    },
+    {
+      "name": "Y. Moutoussamy",
+      "pos": "MF"
+    },
+    {
+      "name": "M. Aguissa",
+      "pos": "MF"
+    },
+    {
+      "name": "M. Elia",
+      "pos": "FW"
+    },
+    {
+      "name": "J. Krasso",
+      "pos": "FW"
+    },
+    {
+      "name": "S. Haller",
+      "pos": "FW"
+    }
+  ],
+  "48": [
+    {
+      "name": "J. Hernandez",
+      "pos": "GK"
+    },
+    {
+      "name": "C. Martinez",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Sanchez",
+      "pos": "DF"
+    },
+    {
+      "name": "A. Torres",
+      "pos": "DF"
+    },
+    {
+      "name": "F. Morales",
+      "pos": "DF"
+    },
+    {
+      "name": "M. Cardona",
+      "pos": "MF"
+    },
+    {
+      "name": "L. Gonzalez",
+      "pos": "MF"
+    },
+    {
+      "name": "G. Ramirez",
+      "pos": "MF"
+    },
+    {
+      "name": "E. Valencia",
+      "pos": "FW"
+    },
+    {
+      "name": "J. Quintero",
+      "pos": "FW"
+    },
+    {
+      "name": "A. Valencia",
+      "pos": "FW"
+    }
+  ]
+}

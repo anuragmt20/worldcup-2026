@@ -14,9 +14,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FIFA World Cup 2026™ | Official Fan Portal",
+  title: "World Cup Eleven | FIFA World Cup 2026™ Fan Portal",
   description: "Experience the FIFA World Cup 2026 across USA, Mexico, and Canada. Track matches, standings, stats, venues, and make predictions.",
   keywords: ["FIFA", "World Cup 2026", "Football", "Soccer", "Schedule", "Standings", "Predictor", "USA", "Canada", "Mexico"],
+  icons: {
+    icon: '/images/trophy.png',
+    shortcut: '/images/trophy.png',
+    apple: '/images/trophy.png',
+  },
 };
 
 export default function RootLayout({

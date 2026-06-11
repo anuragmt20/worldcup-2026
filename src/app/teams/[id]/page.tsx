@@ -4,10 +4,12 @@ import React, { use } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, Calendar, Users, List, MapPin, Play } from 'lucide-react';
 import { useTournamentStore } from '@/lib/store';
+// @ts-ignore
+import lineups from '@/data/football.lineups.json';
 
 export default function TeamDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const { teams, matches, getStandings, stadiums, simulateMatch } = useTournamentStore();
+  const { teams, matches, getStandings, stadiums } = useTournamentStore();
 
   const team = teams.find(t => t.id === id);
   
@@ -29,20 +31,13 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
   const groupStandings = standings[team.group] || [];
   const teamStanding = groupStandings.find(r => r.teamId === team.id);
 
-  // Roster mockup generator based on team name
-  const positions = [
-    { title: 'Goalkeeper', abbr: 'GK', name: 'J. Martinez' },
-    { title: 'Defender', abbr: 'DF', name: 'M. Silva' },
-    { title: 'Defender', abbr: 'DF', name: 'A. Davies' },
-    { title: 'Defender', abbr: 'DF', name: 'K. Brooks' },
-    { title: 'Defender', abbr: 'DF', name: 'L. Hernandez' },
-    { title: 'Midfielder', abbr: 'MF', name: 'T. Adams' },
-    { title: 'Midfielder', abbr: 'MF', name: 'C. Pulisic' },
-    { title: 'Midfielder', abbr: 'MF', name: 'E. Alvarez' },
-    { title: 'Forward', abbr: 'FW', name: 'S. Gimenez' },
-    { title: 'Forward', abbr: 'FW', name: 'J. David' },
-    { title: 'Forward', abbr: 'FW', name: 'F. Balogun' },
-  ];
+  const lineup: { name: string; pos: string }[] = lineups[team.id] ?? [];
+
+  // Group players by position for pitch display
+  const gk  = lineup.filter(p => p.pos === 'GK');
+  const dfs = lineup.filter(p => p.pos === 'DF');
+  const mfs = lineup.filter(p => p.pos === 'MF');
+  const fws = lineup.filter(p => p.pos === 'FW');
 
   // Filter fixtures involving this team
   const teamMatches = matches.filter(m => m.homeTeamId === team.id || m.awayTeamId === team.id);
@@ -61,11 +56,7 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
     }
   };
 
-  const handleSimulate = (matchId: string) => {
-    const h = Math.floor(Math.random() * 3);
-    const a = Math.floor(Math.random() * 3);
-    simulateMatch(matchId, h, a);
-  };
+
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-10 lg:px-12 space-y-8">
@@ -193,7 +184,7 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
                       )}
                     </div>
 
-                    {/* Score or Simulation */}
+                    {/* Score or Status */}
                     <div className="flex items-center gap-3 shrink-0">
                       <span className="text-[10px] font-bold text-slate-400">{formatDate(match.localDate)}</span>
                       
@@ -201,13 +192,12 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
                         <div className={`text-xs font-black px-3 py-1.5 rounded border ${scoreHome > scoreAway ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : scoreHome < scoreAway ? 'bg-rose-500/5 border-rose-500/10 text-rose-400' : 'bg-slate-900 border-slate-850 text-slate-300'}`}>
                           {match.homeScore} - {match.awayScore}
                         </div>
+                      ) : match.timeElapsed !== 'notstarted' ? (
+                        <div className="text-[10px] font-black text-emerald-400 bg-emerald-500/10 border border-emerald-500/15 px-2.5 py-1.5 rounded uppercase tracking-wider">
+                          LIVE &bull; {match.homeScore} - {match.awayScore} ({match.timeElapsed})
+                        </div>
                       ) : opponent ? (
-                        <button
-                          onClick={() => handleSimulate(match.id)}
-                          className="flex items-center gap-1 rounded bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-3 py-1.5 text-[10px] uppercase tracking-wider transition-colors cursor-pointer"
-                        >
-                          <Play className="h-3 w-3" /> Sim
-                        </button>
+                        <div className="text-[10px] text-slate-450 font-bold uppercase border border-slate-850 bg-slate-900/40 px-3 py-1.5 rounded">Scheduled</div>
                       ) : (
                         <div className="text-[10px] text-slate-500 font-bold italic uppercase border border-slate-900 px-3 py-1.5 rounded">TBD</div>
                       )}
@@ -231,7 +221,7 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
             </h3>
 
             {/* Soccer Pitch Graphic representation */}
-            <div className="relative aspect-[3/4] w-full rounded-lg bg-emerald-950/45 border-2 border-emerald-500/20 overflow-hidden flex flex-col justify-between p-4 shadow-inner">
+            <div style={{ aspectRatio: '3/4' }} className="relative w-full rounded-lg bg-emerald-950/45 border-2 border-emerald-500/20 overflow-hidden flex flex-col justify-between p-4 shadow-inner">
               
               {/* Center Line and Center Circle */}
               <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-0.5 bg-emerald-500/10" />
@@ -249,67 +239,46 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
               {/* Pitch Players Nodes representation */}
               {/* Forwards */}
               <div className="flex justify-around items-center z-10 pt-4">
-                <div className="flex flex-col items-center">
-                  <div className="h-7 w-7 rounded-full bg-emerald-500 text-slate-950 font-black text-[10px] flex items-center justify-center border border-white/40 shadow">FW</div>
-                  <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{positions[8].name}</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="h-7 w-7 rounded-full bg-emerald-500 text-slate-950 font-black text-[10px] flex items-center justify-center border border-white/40 shadow">FW</div>
-                  <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{positions[9].name}</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="h-7 w-7 rounded-full bg-emerald-500 text-slate-950 font-black text-[10px] flex items-center justify-center border border-white/40 shadow">FW</div>
-                  <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{positions[10].name}</span>
-                </div>
+                {fws.map((p, i) => (
+                  <div key={i} className="flex flex-col items-center">
+                    <div className="h-7 w-7 rounded-full bg-emerald-500 text-slate-950 font-black text-[10px] flex items-center justify-center border border-white/40 shadow">FW</div>
+                    <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{p.name}</span>
+                  </div>
+                ))}
               </div>
 
               {/* Midfielders */}
               <div className="flex justify-around items-center z-10">
-                <div className="flex flex-col items-center">
-                  <div className="h-7 w-7 rounded-full bg-slate-800 text-slate-200 font-black text-[10px] flex items-center justify-center border border-slate-700 shadow">MF</div>
-                  <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{positions[5].name}</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="h-7 w-7 rounded-full bg-slate-800 text-slate-200 font-black text-[10px] flex items-center justify-center border border-slate-700 shadow">MF</div>
-                  <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{positions[6].name}</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="h-7 w-7 rounded-full bg-slate-800 text-slate-200 font-black text-[10px] flex items-center justify-center border border-slate-700 shadow">MF</div>
-                  <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{positions[7].name}</span>
-                </div>
+                {mfs.map((p, i) => (
+                  <div key={i} className="flex flex-col items-center">
+                    <div className="h-7 w-7 rounded-full bg-slate-800 text-slate-200 font-black text-[10px] flex items-center justify-center border border-slate-700 shadow">MF</div>
+                    <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{p.name}</span>
+                  </div>
+                ))}
               </div>
 
               {/* Defenders */}
               <div className="flex justify-around items-center z-10">
-                <div className="flex flex-col items-center">
-                  <div className="h-7 w-7 rounded-full bg-slate-800 text-slate-200 font-black text-[10px] flex items-center justify-center border border-slate-700 shadow">DF</div>
-                  <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{positions[1].name}</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="h-7 w-7 rounded-full bg-slate-800 text-slate-200 font-black text-[10px] flex items-center justify-center border border-slate-700 shadow">DF</div>
-                  <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{positions[2].name}</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="h-7 w-7 rounded-full bg-slate-800 text-slate-200 font-black text-[10px] flex items-center justify-center border border-slate-700 shadow">DF</div>
-                  <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{positions[3].name}</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <div className="h-7 w-7 rounded-full bg-slate-800 text-slate-200 font-black text-[10px] flex items-center justify-center border border-slate-700 shadow">DF</div>
-                  <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{positions[4].name}</span>
-                </div>
+                {dfs.map((p, i) => (
+                  <div key={i} className="flex flex-col items-center">
+                    <div className="h-7 w-7 rounded-full bg-slate-800 text-slate-200 font-black text-[10px] flex items-center justify-center border border-slate-700 shadow">DF</div>
+                    <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{p.name}</span>
+                  </div>
+                ))}
               </div>
 
               {/* Goalkeeper */}
               <div className="flex justify-center items-center z-10 pb-4">
-                <div className="flex flex-col items-center">
-                  <div className="h-7 w-7 rounded-full bg-yellow-500 text-slate-950 font-black text-[10px] flex items-center justify-center border border-white/40 shadow">GK</div>
-                  <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{positions[0].name}</span>
-                </div>
+                {gk.map((p, i) => (
+                  <div key={i} className="flex flex-col items-center">
+                    <div className="h-7 w-7 rounded-full bg-yellow-500 text-slate-950 font-black text-[10px] flex items-center justify-center border border-white/40 shadow">GK</div>
+                    <span className="text-[9px] font-black text-slate-200 uppercase tracking-wide mt-1.5 bg-slate-950/60 px-1.5 py-0.5 rounded">{p.name}</span>
+                  </div>
+                ))}
               </div>
 
             </div>
           </div>
-
         </div>
 
       </div>

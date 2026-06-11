@@ -8,32 +8,32 @@ export default function VideosPage() {
 
   const videosList = [
     {
-      title: 'FIFA World Cup 2026 Host Cities Official Announcement',
-      youtubeId: 'V9wG4Fq99Zc', // Real FIFA YouTube video ID placeholder
-      duration: '4:15',
+      title: 'FIFA World Cup 26™ | Match Schedule Reveal',
+      youtubeId: 'R9K15sR6_kY',
+      duration: '41:50',
       category: 'Announcements',
-      views: '1.2M views'
+      views: '2.4M views'
     },
     {
-      title: 'We Are 26 - Official Brand Launch Highlights',
-      youtubeId: 'z2YkQh2PuxU',
-      duration: '3:40',
-      category: 'Brand Launch',
-      views: '840K views'
+      title: 'THE GREATEST FINAL EVER?! | Argentina v France | Qatar 2022 Highlights',
+      youtubeId: '2eWu295-e2E',
+      duration: '10:05',
+      category: 'Match Highlights',
+      views: '38M views'
     },
     {
-      title: 'FIFA World Cup Historic Matches: Greatest Moments',
-      youtubeId: 'U-m5W4P7x0Q',
-      duration: '12:30',
-      category: 'Historic Highlights',
-      views: '3.4M views'
+      title: 'Senegal v Netherlands | FIFA World Cup Qatar 2022™ Highlights',
+      youtubeId: '8V89iV9E1-w',
+      duration: '2:06',
+      category: 'Match Highlights',
+      views: '12M views'
     },
     {
-      title: 'Top 10 Goals in FIFA World Cup History',
-      youtubeId: 'f0gSMI45Lmg',
-      duration: '8:45',
-      category: 'Best Goals',
-      views: '5.2M views'
+      title: 'Portugal v Ghana | FIFA World Cup Qatar 2022™ Highlights',
+      youtubeId: 'F3P_8G-6n90',
+      duration: '2:11',
+      category: 'Match Highlights',
+      views: '18M views'
     }
   ];
 

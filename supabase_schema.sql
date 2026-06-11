@@ -69,3 +69,25 @@ $$ language plpgsql security definer;
 create or replace trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
+
+-- ==========================================
+-- 4. Database Migrations (Run in SQL Editor)
+-- ==========================================
+
+-- Alter profiles table to support gamification
+alter table public.profiles add column if not exists has_claimed_welcome boolean default false;
+alter table public.profiles add column if not exists check_in_streak integer default 0;
+alter table public.profiles add column if not exists last_check_in_date text;
+
+-- Alter predictions table to support pool betting
+alter table public.predictions add column if not exists bet_amount integer default 0;
+alter table public.predictions add column if not exists settled boolean default false;
+alter table public.predictions add column if not exists pool_home integer default 0;
+alter table public.predictions add column if not exists pool_draw integer default 0;
+alter table public.predictions add column if not exists pool_away integer default 0;
+alter table public.predictions add column if not exists total_pool integer default 0;
+alter table public.predictions add column if not exists outcome text check (outcome in ('won', 'lost', 'pending')) default 'pending';
+alter table public.predictions add column if not exists payout integer default 0;
+alter table public.predictions add column if not exists acknowledged boolean default false;
+
+

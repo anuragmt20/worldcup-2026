@@ -5,6 +5,9 @@ import { Trophy, Calendar, MapPin, Eye, Clock, BarChart3, ChevronRight, X } from
 import { useTournamentStore } from '@/lib/store';
 import { Match } from '@/types';
 import { formatMatchDateTime } from '@/lib/timezoneUtils';
+import { Cinzel } from 'next/font/google';
+
+const cinzelFont = Cinzel({ subsets: ['latin'] });
 
 export default function ResultsPage() {
   const { matches, teams, stadiums, timezone } = useTournamentStore();
@@ -154,6 +157,220 @@ export default function ResultsPage() {
     );
   };
 
+  const getMatchesByIds = (ids: string[]) => {
+    return ids.map(id => matches.find(m => m.id === id)).filter(Boolean) as Match[];
+  };
+
+  const leftR32 = getMatchesByIds(['73', '74', '75', '76', '77', '78', '79', '80']);
+  const leftR16 = getMatchesByIds(['89', '90', '91', '92']);
+  const leftQF = getMatchesByIds(['97', '98']);
+  const leftSF = getMatchesByIds(['101']);
+
+  const rightSF = getMatchesByIds(['102']);
+  const rightQF = getMatchesByIds(['99', '100']);
+  const rightR16 = getMatchesByIds(['93', '94', '95', '96']);
+  const rightR32 = getMatchesByIds(['81', '82', '83', '84', '85', '86', '87', '88']);
+
+  const grandFinal = matches.find(m => m.id === '104');
+  const thirdPlace = matches.find(m => m.id === '103');
+
+  const renderSymmetricalBracketMatchCard = (match: Match) => {
+    const homeTeam = getTeam(match.homeTeamId);
+    const awayTeam = getTeam(match.awayTeamId);
+    
+    const isHomeWinner = match.finished && (match.homeScore > match.awayScore || (match as any).shootoutWinner === 'home');
+    const isAwayWinner = match.finished && (match.awayScore > match.homeScore || (match as any).shootoutWinner === 'away');
+
+    return (
+      <div 
+        key={match.id}
+        onClick={() => {
+          if (match.finished) {
+            setActiveMatchStats(match);
+          }
+        }}
+        className={`
+          flex flex-col p-2.5 rounded-lg border text-[11px] transition-all duration-200 cursor-pointer w-[130px] shrink-0 bg-slate-950/65 border-slate-900/80 hover:border-emerald-500/50 hover:bg-slate-900/35 relative select-none
+          ${match.finished ? 'shadow-md shadow-emerald-500/5' : ''}
+        `}
+      >
+        <div className="flex justify-between items-center text-[8px] font-black text-slate-500 uppercase tracking-widest mb-1.5">
+          <span>MATCH {match.id}</span>
+          {match.finished && <span className="text-emerald-400 font-black">FT</span>}
+        </div>
+
+        <div className={`flex items-center justify-between py-0.5 ${isHomeWinner ? 'text-slate-100 font-bold' : match.finished ? 'text-slate-500' : 'text-slate-400'}`}>
+          <div className="flex items-center gap-1.5 min-w-0">
+            {homeTeam ? (
+              <>
+                <img src={homeTeam.flag} alt="" className="h-3 w-4.5 object-cover rounded shrink-0 shadow-sm border border-slate-800" />
+                <span className="truncate">{homeTeam.fifaCode}</span>
+              </>
+            ) : (
+              <span className="italic truncate text-[10px] text-slate-550">{match.homeTeamLabel || 'TBD'}</span>
+            )}
+          </div>
+          {match.finished ? (
+            <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded bg-slate-900/60 border border-slate-850/40 min-w-5 text-center ${isHomeWinner ? 'text-emerald-400' : 'text-slate-500'}`}>
+              {match.homeScore}
+            </span>
+          ) : (
+            <span className="text-[10px] font-bold text-slate-700">-</span>
+          )}
+        </div>
+
+        <div className={`flex items-center justify-between py-0.5 mt-0.5 ${isAwayWinner ? 'text-slate-100 font-bold' : match.finished ? 'text-slate-500' : 'text-slate-400'}`}>
+          <div className="flex items-center gap-1.5 min-w-0">
+            {awayTeam ? (
+              <>
+                <img src={awayTeam.flag} alt="" className="h-3 w-4.5 object-cover rounded shrink-0 shadow-sm border border-slate-800" />
+                <span className="truncate">{awayTeam.fifaCode}</span>
+              </>
+            ) : (
+              <span className="italic truncate text-[10px] text-slate-550">{match.awayTeamLabel || 'TBD'}</span>
+            )}
+          </div>
+          {match.finished ? (
+            <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded bg-slate-900/60 border border-slate-850/40 min-w-5 text-center ${isAwayWinner ? 'text-emerald-400' : 'text-slate-500'}`}>
+              {match.awayScore}
+            </span>
+          ) : (
+            <span className="text-[10px] font-bold text-slate-700">-</span>
+          )}
+        </div>
+
+        {match.finished && match.timeElapsed.includes('pen') && (
+          <div className="text-[8px] font-black text-center text-emerald-400 uppercase tracking-widest mt-1.5 pt-1 border-t border-slate-900/40">
+            PENS
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderCenterGrandFinalCard = (match: Match | undefined) => {
+    if (!match) return null;
+    const homeTeam = getTeam(match.homeTeamId);
+    const awayTeam = getTeam(match.awayTeamId);
+
+    const isHomeWinner = match.finished && (match.homeScore > match.awayScore || (match as any).shootoutWinner === 'home');
+    const isAwayWinner = match.finished && (match.awayScore > match.homeScore || (match as any).shootoutWinner === 'away');
+
+    return (
+      <div 
+        onClick={() => {
+          if (match.finished) {
+            setActiveMatchStats(match);
+          }
+        }}
+        className="w-[200px] rounded-xl border-2 border-amber-500/80 bg-slate-950/80 p-5 text-center shadow-[0_0_15px_rgba(245,158,11,0.15)] space-y-4 hover:border-amber-400 cursor-pointer transition-all duration-300 relative overflow-hidden select-none"
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 via-transparent to-transparent pointer-events-none" />
+
+        <div className="relative">
+          <img 
+            src="/images/logo.svg" 
+            alt="FIFA World Cup 2026 Trophy" 
+            className="h-16 w-16 object-contain filter drop-shadow-[0_0_8px_rgba(245,158,11,0.4)] mx-auto"
+          />
+        </div>
+
+        <div className="space-y-0.5">
+          <div className={`${cinzelFont.className} text-[11px] font-black tracking-[0.2em] text-amber-400 uppercase`}>
+            GRAND FINAL
+          </div>
+          <div className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">
+            MATCH 104
+          </div>
+        </div>
+
+        <div className="space-y-3 py-1">
+          <div className="flex items-center justify-between gap-2">
+            {homeTeam ? (
+              <div className="flex items-center gap-1.5 min-w-0">
+                <img src={homeTeam.flag} alt="" className="h-3 w-4.5 object-cover rounded border border-slate-900" />
+                <span className={`text-[11px] font-extrabold truncate ${isHomeWinner ? 'text-amber-400' : 'text-slate-200'}`}>{homeTeam.fifaCode}</span>
+              </div>
+            ) : (
+              <span className="text-[10px] font-bold text-slate-500 italic uppercase truncate">{match.homeTeamLabel || 'TBD'}</span>
+            )}
+            
+            {match.finished ? (
+              <span className={`text-xs font-black min-w-5 text-right ${isHomeWinner ? 'text-amber-400' : 'text-slate-500'}`}>{match.homeScore}</span>
+            ) : (
+              <span className="text-[10px] text-slate-700">-</span>
+            )}
+          </div>
+
+          <div className="text-[8px] font-black text-slate-650 tracking-widest uppercase">VS</div>
+
+          <div className="flex items-center justify-between gap-2">
+            {awayTeam ? (
+              <div className="flex items-center gap-1.5 min-w-0">
+                <img src={awayTeam.flag} alt="" className="h-3 w-4.5 object-cover rounded border border-slate-900" />
+                <span className={`text-[11px] font-extrabold truncate ${isAwayWinner ? 'text-amber-400' : 'text-slate-200'}`}>{awayTeam.fifaCode}</span>
+              </div>
+            ) : (
+              <span className="text-[10px] font-bold text-slate-500 italic uppercase truncate">{match.awayTeamLabel || 'TBD'}</span>
+            )}
+            
+            {match.finished ? (
+              <span className={`text-xs font-black min-w-5 text-right ${isAwayWinner ? 'text-amber-400' : 'text-slate-500'}`}>{match.awayScore}</span>
+            ) : (
+              <span className="text-[10px] text-slate-700">-</span>
+            )}
+          </div>
+        </div>
+
+        <div className="inline-flex items-center justify-center rounded-full border border-amber-500/30 bg-amber-500/5 px-3.5 py-1 text-[9px] font-black text-amber-400 uppercase tracking-widest">
+          07/19/2026
+        </div>
+      </div>
+    );
+  };
+
+  const renderCenterThirdPlaceCard = (match: Match | undefined) => {
+    if (!match) return null;
+    const homeTeam = getTeam(match.homeTeamId);
+    const awayTeam = getTeam(match.awayTeamId);
+
+    const isHomeWinner = match.finished && (match.homeScore > match.awayScore || (match as any).shootoutWinner === 'home');
+    const isAwayWinner = match.finished && (match.awayScore > match.homeScore || (match as any).shootoutWinner === 'away');
+
+    return (
+      <div 
+        onClick={() => {
+          if (match.finished) {
+            setActiveMatchStats(match);
+          }
+        }}
+        className="w-[160px] rounded-lg border border-slate-800 bg-slate-950/65 p-3 text-center space-y-2 hover:border-slate-700 cursor-pointer transition-all duration-300 relative select-none mt-4"
+      >
+        <div className="text-[8px] font-black text-slate-500 tracking-wider uppercase">
+          3RD PLACE MATCH
+        </div>
+
+        <div className="flex items-center justify-around gap-1.5 py-0.5 text-[10px]">
+          {homeTeam ? (
+            <span className={`font-bold ${isHomeWinner ? 'text-emerald-400' : 'text-slate-400'}`}>{homeTeam.fifaCode}</span>
+          ) : (
+            <span className="text-slate-650 italic">TBD</span>
+          )}
+          
+          <span className="text-[9px] font-black text-slate-600">
+            {match.finished ? `${match.homeScore} - ${match.awayScore}` : 'VS'}
+          </span>
+
+          {awayTeam ? (
+            <span className={`font-bold ${isAwayWinner ? 'text-emerald-400' : 'text-slate-400'}`}>{awayTeam.fifaCode}</span>
+          ) : (
+            <span className="text-slate-650 italic">TBD</span>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="mx-auto max-w-7xl px-6 py-10 lg:px-12 space-y-8">
       
@@ -193,69 +410,112 @@ export default function ResultsPage() {
 
       {/* Bracket View */}
       {activeTab === 'bracket' && (
-        <div className="w-full overflow-x-auto pb-4 pt-2">
-          {/* Bracket columns */}
-          <div className="flex gap-8 justify-start items-center min-w-[1000px] h-[580px] px-4">
-            
-            {/* Round of 32 */}
-            <div className="flex flex-col justify-between h-full space-y-2 py-4">
-              <h3 className="text-[10px] font-extrabold text-slate-500 tracking-wider uppercase text-center border-b border-slate-900 pb-1">Round of 32</h3>
-              <div className="flex-1 flex flex-col justify-between overflow-y-auto space-y-3 max-h-[500px] pr-2">
-                {getMatchesByRound('r32').map(renderBracketMatchCard)}
-              </div>
+        <div className="flex flex-col items-center space-y-8 pt-4">
+          {/* Symmetrical Bracket Header */}
+          <div className="text-center space-y-2">
+            <h2 className={`${cinzelFont.className} text-4xl font-extrabold tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-b from-amber-200 via-yellow-400 to-amber-500`} style={{ letterSpacing: '0.15em' }}>
+              ROAD TO GLORY
+            </h2>
+            <div className="text-[9px] font-black tracking-[0.25em] text-slate-500 uppercase">
+              KNOCKOUT STAGE BRACKET
             </div>
+          </div>
 
-            {/* Link divider */}
-            <div className="h-6.5 w-4 border-y border-r border-slate-800/80 rounded-r hidden lg:block" />
+          {/* Symmetrical Bracket container */}
+          <div 
+            className="w-full pb-8 pt-2 overflow-x-auto [&::-webkit-scrollbar]:hidden"
+            style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}
+          >
+            <div className="flex justify-center items-center min-w-max px-4 relative">
+              {/* SVG Flow Lines */}
+              <svg 
+                className="absolute inset-y-0 left-4 pointer-events-none stroke-slate-800/80 fill-none"
+                style={{
+                  width: '1052px',
+                  height: '640px',
+                  zIndex: 0
+                }}
+              >
+                {/* Left Side Connectors */}
+                {/* R16 to QF: Upper */}
+                <path d="M 130,113 L 136,113 L 136,259 L 130,259 M 136,186 L 142,186" strokeWidth="1.5" />
+                {/* R16 to QF: Lower */}
+                <path d="M 130,405 L 136,405 L 136,551 L 130,551 M 136,478 L 142,478" strokeWidth="1.5" />
+                
+                {/* QF to SF */}
+                <path d="M 272,186 L 278,186 L 278,478 L 272,478 M 278,332 L 284,332" strokeWidth="1.5" />
+                
+                {/* SF to Final */}
+                <path d="M 414,332 L 426,332" strokeWidth="1.5" />
 
-            {/* Round of 16 */}
-            <div className="flex flex-col justify-between h-full space-y-2 py-4">
-              <h3 className="text-[10px] font-extrabold text-slate-500 tracking-wider uppercase text-center border-b border-slate-900 pb-1">Round of 16</h3>
-              <div className="flex-1 flex flex-col justify-around space-y-4 pr-2">
-                {getMatchesByRound('r16').map(renderBracketMatchCard)}
-              </div>
-            </div>
+                {/* Right Side Connectors */}
+                {/* SF to Final */}
+                <path d="M 638,332 L 626,332" strokeWidth="1.5" />
 
-            {/* Link divider */}
-            <div className="h-12 w-4 border-y border-r border-slate-800/80 rounded-r hidden lg:block" />
+                {/* QF to SF */}
+                <path d="M 780,186 L 774,186 L 774,478 L 780,478 M 774,332 L 768,332" strokeWidth="1.5" />
 
-            {/* Quarter Finals */}
-            <div className="flex flex-col justify-between h-full space-y-2 py-4">
-              <h3 className="text-[10px] font-extrabold text-slate-500 tracking-wider uppercase text-center border-b border-slate-900 pb-1">Quarter-Finals</h3>
-              <div className="flex-1 flex flex-col justify-around space-y-8 pr-2">
-                {getMatchesByRound('qf').map(renderBracketMatchCard)}
-              </div>
-            </div>
+                {/* R16 to QF: Upper */}
+                <path d="M 922,113 L 916,113 L 916,259 L 922,259 M 916,186 L 910,186" strokeWidth="1.5" />
+                {/* R16 to QF: Lower */}
+                <path d="M 922,405 L 916,405 L 916,551 L 922,551 M 916,478 L 910,478" strokeWidth="1.5" />
+              </svg>
 
-            {/* Link divider */}
-            <div className="h-24 w-4 border-y border-r border-slate-800/80 rounded-r hidden lg:block" />
-
-            {/* Semi Finals */}
-            <div className="flex flex-col justify-between h-full space-y-2 py-4">
-              <h3 className="text-[10px] font-extrabold text-slate-500 tracking-wider uppercase text-center border-b border-slate-900 pb-1">Semi-Finals</h3>
-              <div className="flex-1 flex flex-col justify-around space-y-16 pr-2">
-                {getMatchesByRound('sf').map(renderBracketMatchCard)}
-              </div>
-            </div>
-
-            {/* Final */}
-            <div className="flex flex-col justify-between h-full space-y-2 py-4">
-              <h3 className="text-[10px] font-extrabold text-emerald-400 tracking-wider uppercase text-center border-b border-emerald-500/10 pb-1">Championship</h3>
-              <div className="flex-1 flex flex-col justify-center gap-10">
-                {/* Final Card */}
-                <div className="space-y-1">
-                  <div className="text-[8px] font-bold text-center text-slate-500 uppercase tracking-widest">Grand Final</div>
-                  {getMatchesByRound('final').map(renderBracketMatchCard)}
+              <div 
+                className="grid gap-3 items-center text-center relative z-10"
+                style={{
+                  gridTemplateColumns: '130px 130px 130px 200px 130px 130px 130px'
+                }}
+              >
+                
+                {/* Column 1: Round of 16 (Left) */}
+                <div className="flex flex-col justify-around h-[640px] py-4">
+                  <span className="text-[9px] font-black text-slate-500 tracking-wider uppercase border-b border-slate-900 pb-1.5 mb-2">Round of 16</span>
+                  {leftR16.map(m => renderSymmetricalBracketMatchCard(m))}
                 </div>
 
-                {/* Third Place Card */}
-                <div className="space-y-1">
-                  <div className="text-[8px] font-bold text-center text-slate-500 uppercase tracking-widest">3rd Place Match</div>
-                  {getMatchesByRound('third').map(renderBracketMatchCard)}
+                {/* Column 2: Quarter Finals (Left) */}
+                <div className="flex flex-col justify-around h-[640px] py-4">
+                  <span className="text-[9px] font-black text-slate-500 tracking-wider uppercase border-b border-slate-900 pb-1.5 mb-2">Quarter-Finals</span>
+                  {leftQF.map(m => renderSymmetricalBracketMatchCard(m))}
                 </div>
+
+                {/* Column 3: Semi Finals (Left) */}
+                <div className="flex flex-col justify-center h-[640px] py-4">
+                  <span className="text-[9px] font-black text-slate-500 tracking-wider uppercase border-b border-slate-900 pb-1.5 mb-2">Semi-Finals</span>
+                  {leftSF.map(m => renderSymmetricalBracketMatchCard(m))}
+                </div>
+
+                {/* Column 4: Center (Championship) */}
+                <div className="flex flex-col justify-center items-center h-[640px] py-4 space-y-4">
+                  <span className="text-[9px] font-black text-amber-500/80 tracking-wider uppercase border-b border-amber-500/10 pb-1.5 mb-2 w-full">Championship</span>
+                  {renderCenterGrandFinalCard(grandFinal)}
+                  {renderCenterThirdPlaceCard(thirdPlace)}
+                </div>
+
+                {/* Column 5: Semi Finals (Right) */}
+                <div className="flex flex-col justify-center h-[640px] py-4">
+                  <span className="text-[9px] font-black text-slate-500 tracking-wider uppercase border-b border-slate-900 pb-1.5 mb-2">Semi-Finals</span>
+                  {rightSF.map(m => renderSymmetricalBracketMatchCard(m))}
+                </div>
+
+                {/* Column 6: Quarter Finals (Right) */}
+                <div className="flex flex-col justify-around h-[640px] py-4">
+                  <span className="text-[9px] font-black text-slate-500 tracking-wider uppercase border-b border-slate-900 pb-1.5 mb-2">Quarter-Finals</span>
+                  {rightQF.map(m => renderSymmetricalBracketMatchCard(m))}
+                </div>
+
+                {/* Column 7: Round of 16 (Right) */}
+                <div className="flex flex-col justify-around h-[640px] py-4">
+                  <span className="text-[9px] font-black text-slate-500 tracking-wider uppercase border-b border-slate-900 pb-1.5 mb-2">Round of 16</span>
+                  {rightR16.map(m => renderSymmetricalBracketMatchCard(m))}
+                </div>
+
               </div>
             </div>
-
           </div>
         </div>
       )}

@@ -54,7 +54,7 @@ export default function StadiumsCard() {
         {/* Stadium Image */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="/images/stadium_placeholder.png" 
+            src={currentStadium.image || "/images/stadium_placeholder.png"} 
             alt={currentStadium.name} 
             className="h-full w-full object-cover opacity-60 transition-transform duration-700 group-hover/carousel:scale-105"
           />

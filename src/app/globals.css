@@ -46,6 +46,7 @@ body {
   background: linear-gradient(135deg, rgba(30, 58, 138, 0.25) 0%, rgba(10, 15, 30, 0.45) 100%);
   border: 1px solid rgba(30, 58, 138, 0.4);
 }
+
 .glass-card-blue:hover {
   border-color: rgba(0, 255, 135, 0.3);
 }
@@ -54,6 +55,7 @@ body {
   background: linear-gradient(135deg, rgba(6, 78, 59, 0.25) 0%, rgba(10, 15, 30, 0.45) 100%);
   border: 1px solid rgba(6, 78, 59, 0.4);
 }
+
 .glass-card-green:hover {
   border-color: rgba(0, 255, 135, 0.4);
 }
@@ -62,6 +64,7 @@ body {
   background: linear-gradient(135deg, rgba(88, 28, 135, 0.25) 0%, rgba(10, 15, 30, 0.45) 100%);
   border: 1px solid rgba(88, 28, 135, 0.4);
 }
+
 .glass-card-purple:hover {
   border-color: rgba(0, 255, 135, 0.3);
 }
@@ -70,6 +73,7 @@ body {
   background: linear-gradient(135deg, rgba(14, 116, 144, 0.25) 0%, rgba(10, 15, 30, 0.45) 100%);
   border: 1px solid rgba(14, 116, 144, 0.4);
 }
+
 .glass-card-cyan:hover {
   border-color: rgba(0, 255, 135, 0.3);
 }
@@ -78,13 +82,14 @@ body {
   background: linear-gradient(135deg, rgba(4, 120, 87, 0.25) 0%, rgba(10, 15, 30, 0.45) 100%);
   border: 1px solid rgba(4, 120, 87, 0.4);
 }
+
 .glass-card-emerald:hover {
   border-color: rgba(0, 255, 135, 0.4);
 }
 
 /* Stadium background mesh */
 .stadium-bg {
-  background-image: 
+  background-image:
     radial-gradient(circle at 50% 25%, rgba(0, 255, 135, 0.06) 0%, transparent 45%),
     radial-gradient(circle at 80% 80%, rgba(29, 78, 216, 0.12) 0%, transparent 60%),
     radial-gradient(circle at 20% 90%, rgba(6, 78, 59, 0.08) 0%, transparent 50%);
@@ -98,10 +103,12 @@ body {
     transform: translateY(0px) rotate(0deg);
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
   }
+
   50% {
     transform: translateY(-15px) rotate(1deg);
     filter: drop-shadow(0 25px 25px rgba(0, 255, 135, 0.2));
   }
+
   100% {
     transform: translateY(0px) rotate(0deg);
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
@@ -117,13 +124,16 @@ body {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: rgba(10, 15, 30, 0.2);
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(51, 65, 85, 0.5);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #00FF87;
 }
