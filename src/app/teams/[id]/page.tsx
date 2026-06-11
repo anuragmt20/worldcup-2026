@@ -31,7 +31,7 @@ export default function TeamDetailPage({ params }: { params: Promise<{ id: strin
   const groupStandings = standings[team.group] || [];
   const teamStanding = groupStandings.find(r => r.teamId === team.id);
 
-  const lineup: { name: string; pos: string }[] = lineups[team.id] ?? [];
+  const lineup: { name: string; pos: string }[] = (lineups as Record<string, any>)[team.id] ?? [];
 
   // Group players by position for pitch display
   const gk  = lineup.filter(p => p.pos === 'GK');
